@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ContentFile Version="2010" Moniker="..\bin\Debug\KellermanSoftware.Serialization.dll" DocType="DX.NET">
+  <RelatedProject>documentation.dxp</RelatedProject>
+  <State>
+    <Attributes>
+      <Attribute key="dtscrollpos" valuetype="integer">0</Attribute>
+      <Attribute key="inheritedMembers" valuetype="string">on</Attribute>
+      <Attribute key="protectedMembers" valuetype="string">on</Attribute>
+    </Attributes>
+  </State>
+  <LastSelectedItem>KellermanSoftware.Serialization</LastSelectedItem>
+  <item qn="KellermanSoftware.Serialization">
+    <project_introduction ChangeDateTime="2010-08-21T15:39:22.2253983Z">Powerful binary serialization, encryption, and compression library.</project_introduction>
+    <project_gettingstarted ChangeDateTime="2010-08-21T15:39:53.9572132Z">Add a reference to the assembly to your project then call the various methods.</project_gettingstarted>
+    <summary ChangeDateTime="2010-08-21T17:06:07.4541203Z">&lt;P&gt;Easily convert your objects to and from bytes.&lt;/P&gt;
+&lt;P&gt;&amp;nbsp;&lt;/P&gt;
+&lt;P&gt;These types are supported:&lt;/P&gt;
+&lt;P&gt;bool&lt;BR&gt;byte&lt;BR&gt;char&lt;BR&gt;decimal&lt;BR&gt;double&lt;BR&gt;float&lt;BR&gt;int32&lt;BR&gt;int64&lt;BR&gt;sbyte&lt;BR&gt;short&lt;BR&gt;string&lt;BR&gt;uint32&lt;BR&gt;uint64&lt;BR&gt;ulong&lt;BR&gt;ushort&lt;BR&gt;DateTime&lt;BR&gt;Structs&lt;BR&gt;Arrays&lt;BR&gt;Multi-Dimensional Arrays&lt;BR&gt;IList&lt;BR&gt;IDictionary&lt;BR&gt;Public Fields&lt;BR&gt;Public Properties&lt;BR&gt;Enums&lt;BR&gt;Timespan&lt;BR&gt;GUID&lt;BR&gt;Double Linked Lists and Trees&lt;/P&gt;</summary>
+  </item>
+  <item qn="KellermanSoftware.Serialization~KellermanSoftware.Serialization_namespace">
+    <summary ChangeDateTime="2010-08-21T15:41:55.7811812Z">Powerful binary serialization, encryption and compression library.</summary>
+  </item>
+  <Filters>
+    <CONTENTSTORECOMMON>
+      <IsIncludedItemsOnly>true</IsIncludedItemsOnly>
+    </CONTENTSTORECOMMON>
+    <DX.NETCONTENTSTOREFILTER>
+      <ShowProtectedMembers>true</ShowProtectedMembers>
+      <ShowProtectedFriendMembers>true</ShowProtectedFriendMembers>
+      <ShowFriendMembers>false</ShowFriendMembers>
+      <ShowPrivateMembers>false</ShowPrivateMembers>
+      <ShowInheritedMembers>false</ShowInheritedMembers>
+      <IsSourceCodeContentVisible>true</IsSourceCodeContentVisible>
+    </DX.NETCONTENTSTOREFILTER>
+  </Filters>
+</ContentFile>

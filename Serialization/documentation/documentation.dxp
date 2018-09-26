@@ -1,0 +1,456 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DocumentXProject Id="a4626294-828b-47ae-b1fc-61b3e8c1f3d6" Version="2010.1">
+  <SeparateFiles>false</SeparateFiles>
+  <Flags>
+    <Flag Id="{46CEF21D-3301-4517-A875-A0906828390E}" HighlightColor="#FFA1FFD0">Exclude from Online</Flag>
+    <Flag Id="{4AAE0FD4-7313-4FEE-A25F-0785B885F736}" HighlightColor="#FFFFFFA1">Exclude from Booklet</Flag>
+  </Flags>
+  <PropertyDefinitions />
+  <PropertyDefinitionValues />
+  <Title />
+  <ContentFiles>
+    <ContentFile FileName="KellermanSoftware.Serialization.dxc" Moniker="..\bin\Debug\KellermanSoftware.Serialization.dll" DocType="DX.NET" />
+  </ContentFiles>
+  <ContentFromProjectPlugin />
+  <Filters>
+    <ExcludedItems>
+      <ExcludedItem>KellermanSoftware.Serialization~KellermanSoftware.Serialization.DeserializeItem</ExcludedItem>
+      <ExcludedItem>KellermanSoftware.Serialization~KellermanSoftware.Serialization.SerializeItem</ExcludedItem>
+      <ExcludedItem>KellermanSoftware.Serialization~KellermanSoftware.Serialization.DeserializedCollection</ExcludedItem>
+      <ExcludedItem>KellermanSoftware.Serialization~KellermanSoftware.Serialization.DeserializedCollection+CollectionItem</ExcludedItem>
+      <ExcludedItem>KellermanSoftware.Serialization~KellermanSoftware.Serialization.DeserializedObject</ExcludedItem>
+      <ExcludedItem>KellermanSoftware.Serialization~KellermanSoftware.Serialization.DefaultLabel</ExcludedItem>
+      <ExcludedItem>KellermanSoftware.Serialization~KellermanSoftware.Serialization.KnownObjectLabel</ExcludedItem>
+      <ExcludedItem>KellermanSoftware.Serialization~KellermanSoftware.Serialization.CollectionType</ExcludedItem>
+      <ExcludedItem>KellermanSoftware.Serialization~KellermanSoftware.Serialization.TypeLabel</ExcludedItem>
+      <ExcludedItem>KellermanSoftware.Serialization~KellermanSoftware.Serialization.NullableLabel</ExcludedItem>
+      <ExcludedItem>KellermanSoftware.Serialization~-_namespace</ExcludedItem>
+    </ExcludedItems>
+  </Filters>
+  <ComProjectPlugin />
+  <AjaxProjectPlugin />
+  <DotNetAssemblies>
+    <Assembly FileName="..\bin\Debug\KellermanSoftware.Serialization.dll" RootTypeName="" />
+  </DotNetAssemblies>
+  <DatabaseProjectPlugin>
+    <Databases />
+  </DatabaseProjectPlugin>
+  <XsdProjectPlugin>
+    <XsdSchemas />
+  </XsdProjectPlugin>
+  <GlossaryProjectPlugin>
+    <IsGlossaryOutputEnabled>true</IsGlossaryOutputEnabled>
+    <Glossary>
+      <GlossaryItems />
+      <Title />
+    </Glossary>
+  </GlossaryProjectPlugin>
+  <HelpProjectPlugin ShowGettingStartedPage="true" />
+  <OtherFilesProjectPlugin>
+    <OtherFiles />
+    <DefaultStylesheet></DefaultStylesheet>
+    <DefaultCaptureDirectory></DefaultCaptureDirectory>
+  </OtherFilesProjectPlugin>
+  <SourceControlProjectPlugin />
+  <TasksProjectPlugin>
+    <Tasks>
+      <TaskItems />
+    </Tasks>
+  </TasksProjectPlugin>
+  <TableOfContents>
+    <TocLayout Id="36f136f8-d793-4982-a01c-f844d50c6f10">
+      <Name />
+      <Description />
+      <RootNodes>
+        <TocNode Name="" Id="da653230-f7b5-4b7b-a1e9-814da8409df6" IconIndex="-1" IsNew="false" Target="" DependsOnItemTypeName="" DependsOnItemTypeFilter="" DependsOnMinimumCount="0" DependsOnStillProcessChildNodes="false" BuildFlags="" NodeType="ALLTEMPLATETOCS">
+          <ChildNodes />
+        </TocNode>
+        <TocNode Name="" Id="2464e11f-7d49-4550-b054-08c40592bf09" IconIndex="-1" IsNew="false" Target="" DependsOnItemTypeName="" DependsOnItemTypeFilter="" DependsOnMinimumCount="0" DependsOnStillProcessChildNodes="false" BuildFlags="" NodeType="NOLINK">
+          <CaptionTemplate m="2010-09-14T00:36:27.2030336Z">Licensing</CaptionTemplate>
+          <ChildNodes>
+            <TocNode Name="" Id="8bc0789d-d674-42ac-bd19-2252d69c60b8" IconIndex="-1" IsNew="false" Target="" DependsOnItemTypeName="" DependsOnItemTypeFilter="" DependsOnMinimumCount="0" DependsOnStillProcessChildNodes="false" BuildFlags="" NodeType="PROJECTITEM">
+              <CaptionTemplate />
+              <ChildNodes />
+              <TargetItemId>2369de95-a58e-405b-8b77-057c43849f0e</TargetItemId>
+              <TargetItemBookmark></TargetItemBookmark>
+            </TocNode>
+            <TocNode Name="" Id="25d68155-69fa-4b5c-9889-e125e4a69d25" IconIndex="-1" IsNew="false" Target="" DependsOnItemTypeName="" DependsOnItemTypeFilter="" DependsOnMinimumCount="0" DependsOnStillProcessChildNodes="false" BuildFlags="" NodeType="PROJECTITEM">
+              <CaptionTemplate />
+              <ChildNodes />
+              <TargetItemId>f62067f1-cf4a-459e-9da9-9dda6fa97cf4</TargetItemId>
+              <TargetItemBookmark></TargetItemBookmark>
+            </TocNode>
+            <TocNode Name="" Id="ebfd81e9-2cc1-48cb-acb1-2da1651f7edb" IconIndex="-1" IsNew="false" Target="" DependsOnItemTypeName="" DependsOnItemTypeFilter="" DependsOnMinimumCount="0" DependsOnStillProcessChildNodes="false" BuildFlags="" NodeType="PROJECTITEM">
+              <CaptionTemplate />
+              <ChildNodes />
+              <TargetItemId>ececa343-9fad-47fd-a85a-c8b93507cbe1</TargetItemId>
+              <TargetItemBookmark></TargetItemBookmark>
+            </TocNode>
+          </ChildNodes>
+        </TocNode>
+      </RootNodes>
+    </TocLayout>
+  </TableOfContents>
+  <TopicsProjectPlugin>
+    <TopicCategories>
+      <TopicCategory Id="-" AutoIndex="false">
+        <Caption>(Un-categorized)</Caption>
+        <ChildTopicCategories />
+        <Topics>
+          <Topic Id="2369de95-a58e-405b-8b77-057c43849f0e" Status="New Topic" CreatedOn="2010-09-14T00:36:40.7868105Z" ModifiedOn="2010-09-14T00:39:29.6744703Z" PageTypeName="" AutoIndex="true" HelpContextIds="" Name="Copyright" BuildFlags="">
+            <Title />
+            <ContentsTitle />
+            <Notes></Notes>
+            <TopicSections>
+              <TopicSection Name="BodyText">
+                <Content m="2010-09-14T00:39:29.6744703Z">&lt;P&gt;&lt;SPAN style="FONT-FAMILY: 'Verdana','sans-serif'; COLOR: black; FONT-SIZE: 8pt"&gt;Kellerman Serialization Library V1.x &lt;/SPAN&gt;&lt;/P&gt;
+&lt;P&gt;&lt;SPAN style="FONT-FAMILY: 'Verdana','sans-serif'; COLOR: black; FONT-SIZE: 8pt"&gt;&lt;/SPAN&gt;&lt;SPAN style="FONT-FAMILY: 'Verdana','sans-serif'; COLOR: black; FONT-SIZE: 8pt"&gt;Copyright © 2018 Kellerman Software.&amp;nbsp; All Rights Reserved.&lt;?xml:namespace prefix = o ns = "urn:schemas-microsoft-com:office:office" /&gt;&lt;o:p&gt;&lt;/o:p&gt;&lt;/SPAN&gt;&lt;/P&gt;
+&lt;P&gt;&lt;/P&gt;</Content>
+              </TopicSection>
+            </TopicSections>
+            <TopicLinks />
+            <TopicKeywords />
+            <PropertyDefinitionValues />
+          </Topic>
+          <Topic Id="f62067f1-cf4a-459e-9da9-9dda6fa97cf4" Status="New Topic" CreatedOn="2010-09-14T00:36:47.6742045Z" ModifiedOn="2010-09-14T00:39:29.6904713Z" PageTypeName="" AutoIndex="true" HelpContextIds="" Name="EULA" BuildFlags="">
+            <Title />
+            <ContentsTitle />
+            <Notes></Notes>
+            <TopicSections>
+              <TopicSection Name="BodyText">
+                <Content m="2010-09-14T00:39:29.6904713Z">&lt;P&gt;&lt;SPAN style="FONT-FAMILY: 'Arial','sans-serif'; COLOR: black; FONT-SIZE: 10pt"&gt;Kellerman Software END-USER LICENSE AGREEMENT FOR Kellerman Serialization Library&lt;/SPAN&gt;&lt;/P&gt;
+&lt;P&gt;&lt;SPAN style="FONT-FAMILY: 'Arial','sans-serif'; COLOR: black; FONT-SIZE: 10pt"&gt;&lt;?xml:namespace prefix = o ns = "urn:schemas-microsoft-com:office:office" /&gt;&lt;o:p&gt;&amp;nbsp;&lt;/o:p&gt;&lt;/SPAN&gt;&lt;/P&gt;
+&lt;P&gt;&lt;EM&gt;&lt;SPAN style="FONT-FAMILY: 'Arial','sans-serif'; FONT-SIZE: 10pt"&gt;Please read carefully before installing this software package. Your installation of the package indicates your acceptance of the terms and conditions of this license agreement. Contact Kellerman Software if you have any questions about this license.&lt;o:p&gt;&lt;/o:p&gt;&lt;/SPAN&gt;&lt;/EM&gt;&lt;/P&gt;
+&lt;P&gt;&lt;SPAN style="FONT-FAMILY: 'Arial','sans-serif'; FONT-SIZE: 10pt"&gt;&lt;o:p&gt;&amp;nbsp;&lt;/o:p&gt;&lt;/SPAN&gt;&lt;/P&gt;
+&lt;P&gt;&lt;SPAN style="FONT-FAMILY: 'Arial','sans-serif'; FONT-SIZE: 10pt"&gt;The Software (libraries and object code) is proprietary to&lt;EM&gt;&lt;SPAN style="FONT-STYLE: normal; FONT-FAMILY: 'Arial','sans-serif'; mso-bidi-font-style: italic"&gt; Kellerman Software&lt;/SPAN&gt;&lt;/EM&gt; and is protected by Federal Copyright Law. &lt;EM&gt;&lt;SPAN style="FONT-STYLE: normal; FONT-FAMILY: 'Arial','sans-serif'; mso-bidi-font-style: italic"&gt;Kellerman Software&lt;/SPAN&gt;&lt;/EM&gt; retains the title to and ownership of the Software. &lt;o:p&gt;&lt;/o:p&gt;&lt;/SPAN&gt;&lt;/P&gt;
+&lt;P&gt;&lt;SPAN style="FONT-FAMILY: 'Arial','sans-serif'; COLOR: black; FONT-SIZE: 10pt"&gt;&amp;nbsp;&lt;/SPAN&gt;&lt;SPAN style="FONT-FAMILY: 'Arial','sans-serif'; FONT-SIZE: 10pt"&gt;&lt;o:p&gt;&lt;/o:p&gt;&lt;/SPAN&gt;&lt;/P&gt;
+&lt;P&gt;&lt;SPAN style="FONT-FAMILY: 'Arial','sans-serif'; COLOR: black; FONT-SIZE: 10pt"&gt;This End-User License Agreement ("EULA") is a legally enforceable contract between you ("Customer" or "you") and Kellerman Software a Sole Proprietorship of Ohio ("Kellerman Software"). &amp;nbsp;By clicking I agree, installing, or otherwise using any part of the Software, you agree to be bound by the terms of this EULA.&lt;SPAN style="mso-spacerun: yes"&gt;&amp;nbsp; &lt;/SPAN&gt;If you do not agree to the terms of this EULA, do not install the software. &lt;o:p&gt;&lt;/o:p&gt;&lt;/SPAN&gt;&lt;/P&gt;
+&lt;P&gt;&lt;SPAN style="FONT-FAMILY: 'Arial','sans-serif'; COLOR: black; FONT-SIZE: 10pt"&gt;&amp;nbsp;&lt;o:p&gt;&lt;/o:p&gt;&lt;/SPAN&gt;&lt;/P&gt;
+&lt;P style="TEXT-INDENT: -0.25in; MARGIN-LEFT: 0.5in; mso-list: l0 level1 lfo3; tab-stops: list .5in"&gt;&lt;SPAN style="FONT-FAMILY: 'Arial','sans-serif'; COLOR: black; FONT-SIZE: 10pt; mso-fareast-font-family: Arial"&gt;&lt;SPAN style="mso-list: Ignore"&gt;1.&lt;SPAN style="FONT: 7pt 'Times New Roman'"&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;/SPAN&gt;&lt;/SPAN&gt;&lt;/SPAN&gt;&lt;SPAN style="FONT-FAMILY: 'Arial','sans-serif'; COLOR: black; FONT-SIZE: 10pt"&gt;GRANT OF NON-EXCLUSIVE, LIMITED LICENSE&lt;o:p&gt;&lt;/o:p&gt;&lt;/SPAN&gt;&lt;/P&gt;
+&lt;P style="MARGIN-LEFT: 0.25in"&gt;&lt;SPAN style="FONT-FAMILY: 'Arial','sans-serif'; COLOR: black; FONT-SIZE: 10pt"&gt;The Software and related documentation is licensed, not sold. Any rights not clearly and expressly granted to you under this EULA are reserved to Kellerman Software. Provided you have paid all applicable fees, registered the Software with Kellerman Software, and otherwise complied with this EULA, Kellerman Software grants you the following personal, non-exclusive, non-transferable, limited rights:&lt;o:p&gt;&lt;/o:p&gt;&lt;/SPAN&gt;&lt;/P&gt;
+&lt;P style="TEXT-INDENT: -0.25in; MARGIN-LEFT: 0.75in; mso-list: l2 level1 lfo1; tab-stops: list .75in"&gt;&lt;SPAN style="FONT-FAMILY: 'Verdana','sans-serif'; COLOR: black; FONT-SIZE: 8pt; mso-fareast-font-family: Verdana; mso-bidi-font-size: 10.0pt; mso-bidi-font-family: Verdana"&gt;&lt;SPAN style="mso-list: Ignore"&gt;a.&lt;SPAN style="FONT: 7pt 'Times New Roman'"&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;/SPAN&gt;&lt;/SPAN&gt;&lt;/SPAN&gt;&lt;SPAN style="FONT-FAMILY: 'Arial','sans-serif'; FONT-SIZE: 10pt"&gt;The Software is licensed per software application developer ("developer"). Kellerman Software hereby grants you a nonexclusive License authorizing one, and only one, developer at a time to use the Software for development purposes per license purchased. You are also permitted to distribute applications containing the compiled files on a royalty free basis. The use of this License does not create any kind of partnership or joint ownership interest in your proprietary applications. Please contact Kellerman Software if you require additional Licenses.&lt;SPAN style="mso-spacerun: yes"&gt;&amp;nbsp; &lt;/SPAN&gt;Use of the Product by more than one developer at a time terminates, without notification, this License and the right to use the Product.&lt;SPAN style="mso-spacerun: yes"&gt;&amp;nbsp; &lt;/SPAN&gt;You may copy the Software for archival purposes, provided the copy contains all of the original Software’s proprietary notices.&lt;o:p&gt;&lt;/o:p&gt;&lt;/SPAN&gt;&lt;/P&gt;
+&lt;P style="TEXT-INDENT: -0.25in; MARGIN-LEFT: 0.75in; mso-list: l2 level1 lfo1; tab-stops: list .75in"&gt;&lt;SPAN style="FONT-FAMILY: 'Verdana','sans-serif'; COLOR: black; FONT-SIZE: 8pt; mso-fareast-font-family: Verdana; mso-bidi-font-size: 10.0pt; mso-bidi-font-family: Verdana"&gt;&lt;SPAN style="mso-list: Ignore"&gt;b.&lt;SPAN style="FONT: 7pt 'Times New Roman'"&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;/SPAN&gt;&lt;/SPAN&gt;&lt;/SPAN&gt;&lt;SPAN style="FONT-FAMILY: 'Arial','sans-serif'; COLOR: black; FONT-SIZE: 10pt"&gt;If a Site License of the Software has been purchased; all developers at a single physical postal address may use the Software.&lt;SPAN style="mso-spacerun: yes"&gt;&amp;nbsp; &lt;/SPAN&gt;&lt;/SPAN&gt;&lt;SPAN style="FONT-FAMILY: 'Arial','sans-serif'; FONT-SIZE: 10pt"&gt;&lt;o:p&gt;&lt;/o:p&gt;&lt;/SPAN&gt;&lt;/P&gt;
+&lt;P style="TEXT-INDENT: -0.25in; MARGIN-LEFT: 0.75in; mso-list: l2 level1 lfo1; tab-stops: list .75in"&gt;&lt;SPAN style="FONT-FAMILY: 'Verdana','sans-serif'; COLOR: black; FONT-SIZE: 8pt; mso-fareast-font-family: Verdana; mso-bidi-font-size: 10.0pt; mso-bidi-font-family: Verdana"&gt;&lt;SPAN style="mso-list: Ignore"&gt;c.&lt;SPAN style="FONT: 7pt 'Times New Roman'"&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;/SPAN&gt;&lt;/SPAN&gt;&lt;/SPAN&gt;&lt;SPAN style="FONT-FAMILY: 'Arial','sans-serif'; COLOR: black; FONT-SIZE: 10pt"&gt;If an Enterprise License of the Software has been purchased; all developers in all locations of a Single Company may use the Software.&lt;/SPAN&gt;&lt;SPAN style="FONT-FAMILY: 'Arial','sans-serif'; FONT-SIZE: 10pt"&gt;&lt;o:p&gt;&lt;/o:p&gt;&lt;/SPAN&gt;&lt;/P&gt;
+&lt;P style="TEXT-INDENT: -0.25in; MARGIN-LEFT: 0.75in; mso-list: l2 level1 lfo1; tab-stops: list .5in"&gt;&lt;SPAN style="FONT-FAMILY: 'Verdana','sans-serif'; COLOR: black; FONT-SIZE: 8pt; mso-fareast-font-family: Verdana; mso-bidi-font-size: 10.0pt; mso-bidi-font-family: Verdana"&gt;&lt;SPAN style="mso-list: Ignore"&gt;d.&lt;SPAN style="FONT: 7pt 'Times New Roman'"&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;/SPAN&gt;&lt;/SPAN&gt;&lt;/SPAN&gt;&lt;SPAN style="FONT-FAMILY: 'Arial','sans-serif'; COLOR: black; FONT-SIZE: 10pt"&gt;If a license to the source code for the Software is purchased, you may modify and compile the source code in your application.&lt;SPAN style="mso-spacerun: yes"&gt;&amp;nbsp; &lt;/SPAN&gt;No portion of the source code in an un-compiled form may be distributed even if modifications have been made.&lt;o:p&gt;&lt;/o:p&gt;&lt;/SPAN&gt;&lt;/P&gt;
+&lt;P style="TEXT-INDENT: -0.25in; MARGIN-LEFT: 0.75in; mso-list: l2 level1 lfo1; tab-stops: list .75in"&gt;&lt;SPAN style="FONT-FAMILY: 'Verdana','sans-serif'; COLOR: black; FONT-SIZE: 8pt; mso-fareast-font-family: Verdana; mso-bidi-font-size: 10.0pt; mso-bidi-font-family: Verdana"&gt;&lt;SPAN style="mso-list: Ignore"&gt;e.&lt;SPAN style="FONT: 7pt 'Times New Roman'"&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;/SPAN&gt;&lt;/SPAN&gt;&lt;/SPAN&gt;&lt;SPAN style="FONT-FAMILY: 'Arial','sans-serif'; COLOR: black; FONT-SIZE: 10pt"&gt;You may not distribute, rent, sub-license or otherwise make available to others the software or documentation or copies thereof, except as expressly permitted in this License without prior written consent from Kellerman Software. In the case of an authorized transfer, the transferee must agree to be bound by the terms and conditions of this License Agreement.&lt;o:p&gt;&lt;/o:p&gt;&lt;/SPAN&gt;&lt;/P&gt;
+&lt;P style="TEXT-INDENT: -0.25in; MARGIN-LEFT: 0.75in; mso-list: l2 level1 lfo1; tab-stops: list .75in"&gt;&lt;SPAN style="FONT-FAMILY: 'Verdana','sans-serif'; COLOR: black; FONT-SIZE: 8pt; mso-fareast-font-family: Verdana; mso-bidi-font-size: 10.0pt; mso-bidi-font-family: Verdana"&gt;&lt;SPAN style="mso-list: Ignore"&gt;f.&lt;SPAN style="FONT: 7pt 'Times New Roman'"&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;/SPAN&gt;&lt;/SPAN&gt;&lt;/SPAN&gt;&lt;SPAN style="FONT-FAMILY: 'Arial','sans-serif'; COLOR: black; FONT-SIZE: 10pt"&gt;You may not decompile, disassemble, extract or otherwise reverse engineer any of the Software. &lt;o:p&gt;&lt;/o:p&gt;&lt;/SPAN&gt;&lt;/P&gt;
+&lt;P&gt;&lt;SPAN style="FONT-FAMILY: 'Arial','sans-serif'; COLOR: black; FONT-SIZE: 10pt"&gt;&amp;nbsp;&lt;o:p&gt;&lt;/o:p&gt;&lt;/SPAN&gt;&lt;/P&gt;
+&lt;P style="TEXT-INDENT: -0.25in; MARGIN-LEFT: 0.5in; mso-list: l0 level1 lfo3; tab-stops: list .5in"&gt;&lt;SPAN style="FONT-FAMILY: 'Arial','sans-serif'; COLOR: black; FONT-SIZE: 10pt; mso-fareast-font-family: Arial"&gt;&lt;SPAN style="mso-list: Ignore"&gt;2.&lt;SPAN style="FONT: 7pt 'Times New Roman'"&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;/SPAN&gt;&lt;/SPAN&gt;&lt;/SPAN&gt;&lt;SPAN style="FONT-FAMILY: 'Arial','sans-serif'; COLOR: black; FONT-SIZE: 10pt"&gt;WARRANTY, REMEDY, AND LIMITATIONS&lt;o:p&gt;&lt;/o:p&gt;&lt;/SPAN&gt;&lt;/P&gt;
+&lt;P style="TEXT-INDENT: -0.25in; MARGIN-LEFT: 1in; mso-list: l1 level2 lfo2; tab-stops: list 1.0in"&gt;&lt;SPAN style="FONT-FAMILY: 'Arial','sans-serif'; COLOR: black; FONT-SIZE: 10pt; mso-fareast-font-family: Arial"&gt;&lt;SPAN style="mso-list: Ignore"&gt;a.&lt;SPAN style="FONT: 7pt 'Times New Roman'"&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;/SPAN&gt;&lt;/SPAN&gt;&lt;/SPAN&gt;&lt;SPAN style="FONT-FAMILY: 'Arial','sans-serif'; COLOR: black; FONT-SIZE: 10pt"&gt;Kellerman Software WARRANTS THAT THE SOFTWARE WILL PERFORM IN SUBSTANTIAL ACCORDANCE WITH THE ACCOMPANYING USER MANUAL FOR 30 DAYS FOLLOWING YOUR RECEIPT OF THE SOFTWARE. &amp;nbsp;THIS IS YOUR ONLY WARRANTY.&lt;o:p&gt;&lt;/o:p&gt;&lt;/SPAN&gt;&lt;/P&gt;
+&lt;P style="TEXT-INDENT: -0.25in; MARGIN-LEFT: 1in; mso-list: l1 level2 lfo2; tab-stops: list 1.0in"&gt;&lt;SPAN style="FONT-FAMILY: 'Arial','sans-serif'; COLOR: black; FONT-SIZE: 10pt; mso-fareast-font-family: Arial"&gt;&lt;SPAN style="mso-list: Ignore"&gt;b.&lt;SPAN style="FONT: 7pt 'Times New Roman'"&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;/SPAN&gt;&lt;/SPAN&gt;&lt;/SPAN&gt;&lt;SPAN style="FONT-FAMILY: 'Arial','sans-serif'; COLOR: black; FONT-SIZE: 10pt"&gt;Kellerman Software’ SOLE OBLIGATION AND YOUR EXCLUSIVE REMEDY FOR ANY WARRANTY FAILURE IS TO FOLLOW Kellerman Software’ REGULAR BUSINESS PRACTICES FOR THE CORRECTION, REPLACEMENT OR REMEDY OF A DEFECT.&lt;o:p&gt;&lt;/o:p&gt;&lt;/SPAN&gt;&lt;/P&gt;
+&lt;P style="TEXT-INDENT: -0.25in; MARGIN-LEFT: 1in; mso-list: l1 level2 lfo2; tab-stops: list 1.0in"&gt;&lt;SPAN style="FONT-FAMILY: 'Arial','sans-serif'; COLOR: black; FONT-SIZE: 10pt; mso-fareast-font-family: Arial"&gt;&lt;SPAN style="mso-list: Ignore"&gt;c.&lt;SPAN style="FONT: 7pt 'Times New Roman'"&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;/SPAN&gt;&lt;/SPAN&gt;&lt;/SPAN&gt;&lt;SPAN style="FONT-FAMILY: 'Arial','sans-serif'; COLOR: black; FONT-SIZE: 10pt"&gt;UNLESS OTHERWISE STATED ABOVE, THE SOFTWARE AND THE DOCUMENTATION ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND EITHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. &amp;nbsp;THE ENTIRE RISK ARISING OUT OF THE USE OR PERFORMANCE OF THIS SOFTWARE REMAINS WITH YOU. &amp;nbsp;IN NO EVENT WILL Kellerman Software OR ANY OF ITS SUPPLIERS BE LIABLE FOR ANY INCIDENTAL, CONSEQUENTIAL, INDIRECT OR OTHER SPECIAL DAMAGES, INCLUDING LOST DATA, LOST REVENUES OR LOST PROFITS, EVEN IF THEY HAVE BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES. &amp;nbsp;Kellerman Software RESERVES THE RIGHT TO MODIFY THIS DOCUMENT AT ANY TIME WITHOUT OBLIGATION TO NOTIFY ANYONE. &amp;nbsp;&amp;nbsp;IN NO EVENT SHALL Kellerman Software OR ITS SUPPLIERS’ LIABILITY UNDER THIS AGREEMENT EXCEED THE SUM OF ANY AMOUNTS PAID HEREUNDER BY YOU TO Kellerman Software OR THE SUPPLIER.&lt;o:p&gt;&lt;/o:p&gt;&lt;/SPAN&gt;&lt;/P&gt;
+&lt;P style="MARGIN-LEFT: 30pt"&gt;&lt;SPAN style="FONT-FAMILY: 'Arial','sans-serif'; COLOR: black; FONT-SIZE: 10pt"&gt;&amp;nbsp;&lt;o:p&gt;&lt;/o:p&gt;&lt;/SPAN&gt;&lt;/P&gt;
+&lt;P style="TEXT-INDENT: -0.25in; MARGIN-LEFT: 0.5in; mso-list: l0 level1 lfo3; tab-stops: list .5in"&gt;&lt;SPAN style="FONT-FAMILY: 'Arial','sans-serif'; COLOR: black; FONT-SIZE: 10pt; mso-fareast-font-family: Arial"&gt;&lt;SPAN style="mso-list: Ignore"&gt;3.&lt;SPAN style="FONT: 7pt 'Times New Roman'"&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;/SPAN&gt;&lt;/SPAN&gt;&lt;/SPAN&gt;&lt;SPAN style="FONT-FAMILY: 'Arial','sans-serif'; COLOR: black; FONT-SIZE: 10pt"&gt;TERMINATION&lt;o:p&gt;&lt;/o:p&gt;&lt;/SPAN&gt;&lt;/P&gt;
+&lt;P style="MARGIN-LEFT: 0.5in"&gt;&lt;SPAN style="FONT-FAMILY: 'Arial','sans-serif'; COLOR: black; FONT-SIZE: 10pt"&gt;The license will terminate automatically if you fail to comply with the terms, conditions, or limitations contained in this EULA, including the payment of applicable license or other fees. &amp;nbsp;You may terminate this EULA at any time (with no obligation on the part of Kellerman Software) by destroying all copies of the Software, deleting any copies of the Software from your hard drives, ceasing all use of the Software and documentation; and providing satisfactory proof to Kellerman Software that you have done so. &amp;nbsp;The disclaimer of warranty and limitations on liability contained in Section 2 shall continue in force even after your rights to use the Software are terminated.&lt;o:p&gt;&lt;/o:p&gt;&lt;/SPAN&gt;&lt;/P&gt;
+&lt;P&gt;&lt;SPAN style="FONT-FAMILY: 'Arial','sans-serif'; COLOR: black; FONT-SIZE: 10pt"&gt;&amp;nbsp;&lt;o:p&gt;&lt;/o:p&gt;&lt;/SPAN&gt;&lt;/P&gt;
+&lt;P style="TEXT-INDENT: -0.25in; MARGIN-LEFT: 0.5in; mso-list: l0 level1 lfo3; tab-stops: list .5in"&gt;&lt;SPAN style="FONT-FAMILY: 'Arial','sans-serif'; COLOR: black; FONT-SIZE: 10pt; mso-fareast-font-family: Arial"&gt;&lt;SPAN style="mso-list: Ignore"&gt;4.&lt;SPAN style="FONT: 7pt 'Times New Roman'"&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;/SPAN&gt;&lt;/SPAN&gt;&lt;/SPAN&gt;&lt;SPAN style="FONT-FAMILY: 'Arial','sans-serif'; COLOR: black; FONT-SIZE: 10pt"&gt;DEMO OR EVALUATION VERSIONS&lt;o:p&gt;&lt;/o:p&gt;&lt;/SPAN&gt;&lt;/P&gt;
+&lt;P style="MARGIN-LEFT: 0.5in"&gt;&lt;SPAN style="FONT-FAMILY: 'Arial','sans-serif'; COLOR: black; FONT-SIZE: 10pt"&gt;If Kellerman Software designates the Software as a "Demo" or "Evaluation" version, you may use the Software solely for evaluation purposes for a 30-day period. &amp;nbsp;Use of the Software and/or documentation beyond the 30-day evaluation period violates Kellerman Software’s rights, as described above, including but not limited to Kellerman Software’ rights under the United States Copyright Act. You acknowledge that any Demo or Evaluation version is merely a technology demonstration that may not be at the level of performance or compatibility of generally available Kellerman Software’s products. Demo or Evaluation versions are provided strictly on an "as is" basis and are subject to Section 2 above.&lt;o:p&gt;&lt;/o:p&gt;&lt;/SPAN&gt;&lt;/P&gt;
+&lt;P&gt;&lt;SPAN style="FONT-FAMILY: 'Arial','sans-serif'; COLOR: black; FONT-SIZE: 10pt"&gt;&amp;nbsp;&lt;o:p&gt;&lt;/o:p&gt;&lt;/SPAN&gt;&lt;/P&gt;
+&lt;P style="TEXT-INDENT: -0.25in; MARGIN-LEFT: 0.5in; mso-list: l0 level1 lfo3; tab-stops: list .5in"&gt;&lt;SPAN style="FONT-FAMILY: 'Arial','sans-serif'; COLOR: black; FONT-SIZE: 10pt; mso-fareast-font-family: Arial"&gt;&lt;SPAN style="mso-list: Ignore"&gt;5.&lt;SPAN style="FONT: 7pt 'Times New Roman'"&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;/SPAN&gt;&lt;/SPAN&gt;&lt;/SPAN&gt;&lt;SPAN style="FONT-FAMILY: 'Arial','sans-serif'; COLOR: black; FONT-SIZE: 10pt"&gt;UPGRADES&lt;o:p&gt;&lt;/o:p&gt;&lt;/SPAN&gt;&lt;/P&gt;
+&lt;P style="MARGIN-LEFT: 0.5in"&gt;&lt;SPAN style="FONT-FAMILY: 'Arial','sans-serif'; COLOR: black; FONT-SIZE: 10pt"&gt;If the Software is designated by Kellerman Software as an Upgrade product, you may only use the Software if you are also currently a licensed user of the base product to which the Upgrade applies. &amp;nbsp;Unless the Kellerman Software documentation for an Upgrade specifically provides, you shall not separate upgrade products from base products, nor transfer them separately. &amp;nbsp;Kellerman Software reserves the sole and exclusive right to set its policies and prices regarding updates, upgrades and enhancements. &amp;nbsp;All other terms of this EULA apply with equal force to any such Upgrades.&lt;o:p&gt;&lt;/o:p&gt;&lt;/SPAN&gt;&lt;/P&gt;
+&lt;P&gt;&lt;SPAN style="FONT-FAMILY: 'Arial','sans-serif'; COLOR: black; FONT-SIZE: 10pt"&gt;&amp;nbsp;&lt;o:p&gt;&lt;/o:p&gt;&lt;/SPAN&gt;&lt;/P&gt;
+&lt;P style="TEXT-INDENT: -0.25in; MARGIN-LEFT: 0.5in; mso-list: l0 level1 lfo3; tab-stops: list .5in"&gt;&lt;SPAN style="FONT-FAMILY: 'Arial','sans-serif'; COLOR: black; FONT-SIZE: 10pt; mso-fareast-font-family: Arial"&gt;&lt;SPAN style="mso-list: Ignore"&gt;6.&lt;SPAN style="FONT: 7pt 'Times New Roman'"&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;/SPAN&gt;&lt;/SPAN&gt;&lt;/SPAN&gt;&lt;SPAN style="FONT-FAMILY: 'Arial','sans-serif'; COLOR: black; FONT-SIZE: 10pt"&gt;GOVERNING LAW; VENUE &lt;o:p&gt;&lt;/o:p&gt;&lt;/SPAN&gt;&lt;/P&gt;
+&lt;P style="MARGIN-LEFT: 0.5in"&gt;&lt;SPAN style="FONT-FAMILY: 'Arial','sans-serif'; COLOR: black; FONT-SIZE: 10pt"&gt;This EULA shall be governed by and construed under the substantive laws applicable to the State of &lt;?xml:namespace prefix = st1 ns = "urn:schemas-microsoft-com:office:smarttags" /&gt;&lt;st1:State w:st="on"&gt;Ohio&lt;/st1:State&gt;, &lt;st1:place w:st="on"&gt;&lt;st1:country-region w:st="on"&gt;United States of America&lt;/st1:country-region&gt;&lt;/st1:place&gt;. &amp;nbsp;If any provision of this EULA is held to be unenforceable, the remaining provisions shall remain in full force and effect.&lt;o:p&gt;&lt;/o:p&gt;&lt;/SPAN&gt;&lt;/P&gt;
+&lt;P style="MARGIN-LEFT: 0.5in"&gt;&lt;SPAN style="FONT-FAMILY: 'Arial','sans-serif'; COLOR: black; FONT-SIZE: 10pt"&gt;The undersigned agrees that this EULA is entered into at &lt;st1:City w:st="on"&gt;Columbus&lt;/st1:City&gt;, &lt;st1:State w:st="on"&gt;Ohio&lt;/st1:State&gt;, and further agrees that any legal or equitable dispute brought or arising under this Agreement shall be brought in the State and Federal courts for &lt;st1:place w:st="on"&gt;&lt;st1:City w:st="on"&gt;Columbus&lt;/st1:City&gt;, &lt;st1:State w:st="on"&gt;Ohio&lt;/st1:State&gt;&lt;/st1:place&gt;. This Agreement constitutes the entire Agreement between the undersigned and Kellerman Software about the Software and documentation, and shall not be modified except in a writing signed by Kellerman Software.&lt;o:p&gt;&lt;/o:p&gt;&lt;/SPAN&gt;&lt;/P&gt;
+&lt;P style="MARGIN: 0in 0in 0pt" class=MsoNormal&gt;&lt;SPAN style="FONT-FAMILY: 'Arial','sans-serif'; FONT-SIZE: 10pt"&gt;&lt;o:p&gt;&amp;nbsp;&lt;/o:p&gt;&lt;/SPAN&gt;&lt;/P&gt;
+&lt;P&gt;&lt;/P&gt;</Content>
+              </TopicSection>
+            </TopicSections>
+            <TopicLinks />
+            <TopicKeywords />
+            <PropertyDefinitionValues />
+          </Topic>
+          <Topic Id="ececa343-9fad-47fd-a85a-c8b93507cbe1" Status="New Topic" CreatedOn="2010-09-14T00:36:56.5197104Z" ModifiedOn="2010-09-14T00:39:29.6924714Z" PageTypeName="" AutoIndex="true" HelpContextIds="" Name="Distribution" BuildFlags="">
+            <Title />
+            <ContentsTitle />
+            <Notes></Notes>
+            <TopicSections>
+              <TopicSection Name="BodyText">
+                <Content m="2010-09-14T00:39:29.6924714Z">&lt;P&gt;&lt;SPAN style="FONT-FAMILY: 'Verdana','sans-serif'; COLOR: black; FONT-SIZE: 8pt"&gt;Kellerman Serialization Library&amp;nbsp;is licensed on a per developer basis.&amp;nbsp; A license must be purchased for each developer using the component.&amp;nbsp; The component can be distributed royalty free in end user applications.&amp;nbsp;&amp;nbsp; For more information&amp;nbsp;see the EULA (End User License Agreement).&amp;nbsp;&lt;?xml:namespace prefix = o ns = "urn:schemas-microsoft-com:office:office" /&gt;&lt;o:p&gt;&lt;/o:p&gt;&lt;/SPAN&gt;&lt;/P&gt;</Content>
+              </TopicSection>
+            </TopicSections>
+            <TopicLinks />
+            <TopicKeywords />
+            <PropertyDefinitionValues />
+          </Topic>
+        </Topics>
+      </TopicCategory>
+    </TopicCategories>
+    <CustomTopicPropertyDefinitions />
+    <PropertyDefinitionValues />
+    <AutoNameDigits>0</AutoNameDigits>
+    <AutoNameLastNumber>0</AutoNameLastNumber>
+    <AutoNameEnabled>false</AutoNameEnabled>
+    <AutoNamePrefix></AutoNamePrefix>
+    <IncludeTopicNameInTitle>false</IncludeTopicNameInTitle>
+    <TopicEditorState>
+      <Attributes />
+    </TopicEditorState>
+  </TopicsProjectPlugin>
+  <WidgetsProjectPlugin>
+    <WidgetTypes Version="2010.0" />
+  </WidgetsProjectPlugin>
+  <ProjectProfiles>
+    <ProjectProfile Id="251021ee-095a-46d8-b115-e4fb61aea4a7" Name="Kellerman Software Serialization">
+      <DefaultItemQualifiedName></DefaultItemQualifiedName>
+      <StripMetadata>false</StripMetadata>
+      <AlwaysCopyTemplateFiles>true</AlwaysCopyTemplateFiles>
+      <OutputFileExtension>.html</OutputFileExtension>
+      <Title m="2010-08-21T15:37:27.9338612Z">Kellerman Software Serialization</Title>
+      <ClearOutputDirectoryBeforeBuild>false</ClearOutputDirectoryBeforeBuild>
+      <IsNewIndicatorEnabled>true</IsNewIndicatorEnabled>
+      <IsNewDateTime></IsNewDateTime>
+      <PropertyDefinitionValues>
+        <PropertyDefinitionValue PropertyDefinitionId="2f9f3fe0-f813-47cd-ba2e-ed8c50f24abc">
+          <PropertyValue m="2010-08-21T15:36:32.6586996Z">&lt;a href="mailto:support@kellermansoftware.com?subject=Documentation Feedback: %%FileName%%"&gt;Send Feedback&lt;/a&gt;</PropertyValue>
+        </PropertyDefinitionValue>
+      </PropertyDefinitionValues>
+      <IsTidyXhtmlEnabled>false</IsTidyXhtmlEnabled>
+      <CommunityOptions UseLocalProxyUrl="false" Enabled="false">
+        <ServerType>PublicEvaluation</ServerType>
+        <LocalProxyUrl></LocalProxyUrl>
+        <HostingAccessKey></HostingAccessKey>
+        <PrivateServerUrl></PrivateServerUrl>
+        <PrivateServerAccessKey></PrivateServerAccessKey>
+        <ProjectKey />
+      </CommunityOptions>
+      <DotNet>
+        <IncludeRelationshipDiagrams>true</IncludeRelationshipDiagrams>
+        <IncludeInheritanceHierarchies>true</IncludeInheritanceHierarchies>
+        <IncludeSystemObjectMembers>false</IncludeSystemObjectMembers>
+        <InterfacesToIgnoreInSyntax>System.*</InterfacesToIgnoreInSyntax>
+        <NoInheritedMemberTopicsInternal>true</NoInheritedMemberTopicsInternal>
+        <LinkToExternalDocs>false</LinkToExternalDocs>
+        <UseXmlCommentFile>true</UseXmlCommentFile>
+        <UseExternalXmlCommentFiles>false</UseExternalXmlCommentFiles>
+        <NoInheritedMemberTopicsExternal>false</NoInheritedMemberTopicsExternal>
+        <NoInheritedInLists>false</NoInheritedInLists>
+        <ExcludeEditorBrowsable>true</ExcludeEditorBrowsable>
+        <ExcludeBrowsableFalse>false</ExcludeBrowsableFalse>
+        <ExcludeObsolete>false</ExcludeObsolete>
+        <GenerateXmlCommentFile>false</GenerateXmlCommentFile>
+        <IncludeBreadcrumbs>true</IncludeBreadcrumbs>
+        <IncludeAssemblyBreadcrumb>false</IncludeAssemblyBreadcrumb>
+        <IncludePrivateMembers>false</IncludePrivateMembers>
+        <IncludeFriendMembers>false</IncludeFriendMembers>
+        <IncludeProtectedFriendMembers>false</IncludeProtectedFriendMembers>
+        <IncludeProtectedMembers>true</IncludeProtectedMembers>
+        <IncludeAttributes>true</IncludeAttributes>
+        <AttributeFilterType>Exclude</AttributeFilterType>
+        <AttributeFilter></AttributeFilter>
+        <XmlIsland></XmlIsland>
+        <IdentifyAccessInTitles>false</IdentifyAccessInTitles>
+        <XmlCommentUsage>Merge</XmlCommentUsage>
+        <DiagramSettings OverviewNestingLevels="0" PageNestingLevels="0" DiagramStyleSource="Template">
+          <SuppressSingleObjectDiagrams>false</SuppressSingleObjectDiagrams>
+          <DiagramStyle>
+            <CommonStyle OuterMargin="10" ShareSize="true">
+              <IsNewBrush>#FFFF0000</IsNewBrush>
+              <IsNewSize>10</IsNewSize>
+              <UseDropShadow>false</UseDropShadow>
+              <DropShadowOpacity>0.3</DropShadowOpacity>
+              <DropShadowDepth>3</DropShadowDepth>
+              <DropShadowColor>#FF000000</DropShadowColor>
+              <DropShadowDirection>300</DropShadowDirection>
+              <Connector Brush="#FF808080" Thickness="1.5" StyleName="Solid" Indent="30" />
+            </CommonStyle>
+            <ObjectItemStyle Font="Tahoma" FontSize="12" FontBrush="#FF000000" FontWeight="Normal" FontStyle="Normal" TextPadding="5" HorizontalAlignment="Left" BackgroundBrush="#FFADD8E6" BorderBrush="#FF808080" BorderThickness="0" EndCap="Rounded" />
+            <CollectionItemStyle Font="Tahoma" FontSize="12" FontBrush="#FF000000" FontWeight="Normal" FontStyle="Normal" TextPadding="5" HorizontalAlignment="Left" BackgroundBrush="#FFADD8E6" BorderBrush="#FF808080" BorderThickness="0" EndCap="Rounded" />
+          </DiagramStyle>
+          <DiagramRelationshipsFrom>All</DiagramRelationshipsFrom>
+          <DiagramDefaultCollectionMemberOnly>false</DiagramDefaultCollectionMemberOnly>
+        </DiagramSettings>
+        <IncludeVbNetDefaultConstructor>false</IncludeVbNetDefaultConstructor>
+        <UseOverloadSummaryForMasterSummary>true</UseOverloadSummaryForMasterSummary>
+        <LinkOverriddenMembersToBaseImplementation>false</LinkOverriddenMembersToBaseImplementation>
+        <GenericIndicator>ArgumentsInBrackets</GenericIndicator>
+        <RootAssemblyName></RootAssemblyName>
+        <IncludeConstructorsOnAbstractTypes>false</IncludeConstructorsOnAbstractTypes>
+        <TemplateName>Visual Studio 2008 Style</TemplateName>
+        <ExcludeAllPrivateTypes>true</ExcludeAllPrivateTypes>
+        <ExcludeAllFriendTypes>true</ExcludeAllFriendTypes>
+        <ExcludeAllProtectedTypes>false</ExcludeAllProtectedTypes>
+        <ExcludeAllProtectedFriendTypes>false</ExcludeAllProtectedFriendTypes>
+        <SyntaxSectionStyle>TemplateDefault</SyntaxSectionStyle>
+        <IsVbSyntaxMerged>true</IsVbSyntaxMerged>
+        <ExcludedLanguages />
+      </DotNet>
+      <Ajax>
+        <IncludeRelationshipDiagrams>false</IncludeRelationshipDiagrams>
+        <IncludeInheritanceHierarchies>true</IncludeInheritanceHierarchies>
+        <NoInheritedMemberTopicsInternal>true</NoInheritedMemberTopicsInternal>
+        <UseXmlCommentFile>true</UseXmlCommentFile>
+        <NoInheritedInLists>false</NoInheritedInLists>
+        <ExcludeBrowsableFalse>false</ExcludeBrowsableFalse>
+        <IncludeBreadcrumbs>true</IncludeBreadcrumbs>
+        <IncludeComponentBreadcrumb>false</IncludeComponentBreadcrumb>
+        <XmlIsland></XmlIsland>
+        <XmlCommentUsage>Merge</XmlCommentUsage>
+        <DiagramSettings OverviewNestingLevels="0" PageNestingLevels="0" DiagramStyleSource="Template">
+          <SuppressSingleObjectDiagrams>false</SuppressSingleObjectDiagrams>
+          <DiagramStyle>
+            <CommonStyle OuterMargin="10" ShareSize="true">
+              <IsNewBrush>#FFFF0000</IsNewBrush>
+              <IsNewSize>10</IsNewSize>
+              <UseDropShadow>false</UseDropShadow>
+              <DropShadowOpacity>0.3</DropShadowOpacity>
+              <DropShadowDepth>3</DropShadowDepth>
+              <DropShadowColor>#FF000000</DropShadowColor>
+              <DropShadowDirection>300</DropShadowDirection>
+              <Connector Brush="#FF808080" Thickness="1.5" StyleName="Solid" Indent="30" />
+            </CommonStyle>
+            <ObjectItemStyle Font="Tahoma" FontSize="12" FontBrush="#FF000000" FontWeight="Normal" FontStyle="Normal" TextPadding="5" HorizontalAlignment="Left" BackgroundBrush="#FFADD8E6" BorderBrush="#FF808080" BorderThickness="0" EndCap="Rounded" />
+            <CollectionItemStyle Font="Tahoma" FontSize="12" FontBrush="#FF000000" FontWeight="Normal" FontStyle="Normal" TextPadding="5" HorizontalAlignment="Left" BackgroundBrush="#FFADD8E6" BorderBrush="#FF808080" BorderThickness="0" EndCap="Rounded" />
+          </DiagramStyle>
+          <DiagramRelationshipsFrom>All</DiagramRelationshipsFrom>
+          <DiagramDefaultCollectionMemberOnly>false</DiagramDefaultCollectionMemberOnly>
+        </DiagramSettings>
+        <RootComponentName></RootComponentName>
+        <IncludeConstructorsOnAbstractTypes>false</IncludeConstructorsOnAbstractTypes>
+        <TemplateName>Visual Studio 2008 Style</TemplateName>
+        <ExcludeAllPrivateTypes>true</ExcludeAllPrivateTypes>
+        <ExcludeAllFriendTypes>true</ExcludeAllFriendTypes>
+        <ExcludeAllProtectedTypes>false</ExcludeAllProtectedTypes>
+        <ExcludeAllProtectedFriendTypes>false</ExcludeAllProtectedFriendTypes>
+      </Ajax>
+      <Com>
+        <IncludeRelationshipDiagrams>true</IncludeRelationshipDiagrams>
+        <UseHelpStrings>true</UseHelpStrings>
+        <ExcludeBrowsableFalse>false</ExcludeBrowsableFalse>
+        <IncludeBreadcrumbs>true</IncludeBreadcrumbs>
+        <IncludeProjectBreadcrumb>false</IncludeProjectBreadcrumb>
+        <IncludePrivateMembers>false</IncludePrivateMembers>
+        <HelpStringUsage>Merge</HelpStringUsage>
+        <DiagramSettings OverviewNestingLevels="2" PageNestingLevels="3" DiagramStyleSource="Template">
+          <SuppressSingleObjectDiagrams>true</SuppressSingleObjectDiagrams>
+          <DiagramStyle>
+            <CommonStyle OuterMargin="10" ShareSize="true">
+              <IsNewBrush>#FFFF0000</IsNewBrush>
+              <IsNewSize>10</IsNewSize>
+              <UseDropShadow>false</UseDropShadow>
+              <DropShadowOpacity>0.3</DropShadowOpacity>
+              <DropShadowDepth>3</DropShadowDepth>
+              <DropShadowColor>#FF000000</DropShadowColor>
+              <DropShadowDirection>300</DropShadowDirection>
+              <Connector Brush="#FF808080" Thickness="1.5" StyleName="Solid" Indent="30" />
+            </CommonStyle>
+            <ObjectItemStyle Font="Tahoma" FontSize="12" FontBrush="#FF000000" FontWeight="Normal" FontStyle="Normal" TextPadding="5" HorizontalAlignment="Left" BackgroundBrush="#FFADD8E6" BorderBrush="#FF808080" BorderThickness="0" EndCap="Rounded" />
+            <CollectionItemStyle Font="Tahoma" FontSize="12" FontBrush="#FF000000" FontWeight="Normal" FontStyle="Normal" TextPadding="5" HorizontalAlignment="Left" BackgroundBrush="#FFADD8E6" BorderBrush="#FF808080" BorderThickness="0" EndCap="Rounded" />
+          </DiagramStyle>
+          <DiagramRelationshipsFrom>All</DiagramRelationshipsFrom>
+          <DiagramDefaultCollectionMemberOnly>true</DiagramDefaultCollectionMemberOnly>
+        </DiagramSettings>
+        <RootProjectName></RootProjectName>
+        <IncludeConstructorsOnAbstractTypes>false</IncludeConstructorsOnAbstractTypes>
+        <TemplateName>Visual Studio 2008 Style</TemplateName>
+        <ExcludeAllPrivateTypes>true</ExcludeAllPrivateTypes>
+      </Com>
+      <Database>
+        <TemplateName>Visual Studio 2008 Style</TemplateName>
+        <IncludeSqlServerSystemObjects>false</IncludeSqlServerSystemObjects>
+        <IncludeSourceForViews>true</IncludeSourceForViews>
+        <IncludeSourceForTriggers>true</IncludeSourceForTriggers>
+        <IncludeSourceForUserDefinedFunctions>true</IncludeSourceForUserDefinedFunctions>
+        <IncludeSourceForStoredProcedures>true</IncludeSourceForStoredProcedures>
+        <IncludeScriptForTables>true</IncludeScriptForTables>
+        <IncludeScriptForOtherItems>true</IncludeScriptForOtherItems>
+        <RemoveTaggedCommentsFromSource>true</RemoveTaggedCommentsFromSource>
+        <IncludeBreadcrumbs>true</IncludeBreadcrumbs>
+        <IncludeSchemaInformation>true</IncludeSchemaInformation>
+        <SourceContentUsage>Merge</SourceContentUsage>
+        <UseSourceContent>true</UseSourceContent>
+        <MaximumDependencyLevel>5</MaximumDependencyLevel>
+      </Database>
+      <Xsd>
+        <TemplateName>Visual Studio 2008 Style</TemplateName>
+        <IncludeBreadcrumbs>true</IncludeBreadcrumbs>
+        <SourceContentUsage>Merge</SourceContentUsage>
+        <UseSourceContent>true</UseSourceContent>
+        <IncludeOverview>true</IncludeOverview>
+        <IncludeOverviewReferencedChildren>false</IncludeOverviewReferencedChildren>
+        <OverviewLevels>5</OverviewLevels>
+        <DiagramStyle>
+          <DefaultTextOptions></DefaultTextOptions>
+          <Options></Options>
+        </DiagramStyle>
+        <IncludeAttributesInDiagrams>true</IncludeAttributesInDiagrams>
+        <SuppressSingleObjectDiagrams>false</SuppressSingleObjectDiagrams>
+        <DiagramItemMaxExtendedRecurse>3</DiagramItemMaxExtendedRecurse>
+        <DiagramItemMaxRecurse>3</DiagramItemMaxRecurse>
+        <GenerateDiagrams>true</GenerateDiagrams>
+        <IsOverrideTemplateDiagramStyleEnabled>false</IsOverrideTemplateDiagramStyleEnabled>
+      </Xsd>
+      <Filters />
+      <HelpCompiler CompileHelpFile="true" IsWebOutputEnabled="false" IsMarkOfTheWebEnabled="false">
+        <MarkOfTheWebDomain>(0014)about:internet</MarkOfTheWebDomain>
+        <HelpFileVersion>HtmlHelp1</HelpFileVersion>
+        <Help2Namespace>documentation</Help2Namespace>
+        <Help2FileId>Default</Help2FileId>
+        <Help2PluginToNamespaces></Help2PluginToNamespaces>
+        <Help2Plugin>false</Help2Plugin>
+        <RuntimeMerge></RuntimeMerge>
+        <IncludeTextPopupFile>false</IncludeTextPopupFile>
+        <Help3BuildIdentifier></Help3BuildIdentifier>
+        <Help3VendorName></Help3VendorName>
+        <Help3CatalogName>VS</Help3CatalogName>
+        <Help3CatalogVersion>100</Help3CatalogVersion>
+        <Help3CatalogLocaleText>en-US</Help3CatalogLocaleText>
+        <Help3TemplateName></Help3TemplateName>
+        <Help3ProductName></Help3ProductName>
+        <Help3BookName></Help3BookName>
+        <IsHelp3CreateRegistrationScriptEnabled>true</IsHelp3CreateRegistrationScriptEnabled>
+        <IsHelp3RegisterLocallyEnabled>true</IsHelp3RegisterLocallyEnabled>
+        <IsHelp3SigningEnabled>false</IsHelp3SigningEnabled>
+        <IsHelp3ValidationEnabled>false</IsHelp3ValidationEnabled>
+        <IsHelp3KeywordsEnabled>false</IsHelp3KeywordsEnabled>
+        <HelpFileName>..\..\Serialization-Help\Serialization-Help.chm</HelpFileName>
+      </HelpCompiler>
+      <RuleEngine>
+        <Rules Caption="" MatchType="All" IsReadOnly="false" Id="root">
+          <Rules>
+            <RuleGroup Caption="" MatchType="All" IsReadOnly="false" Id="standard">
+              <Rules>
+                <Rule Caption="" MatchType="All" IsReadOnly="false" Id="outputtype">
+                  <Conditions>
+                    <RuleCondition BuildFlagMatchType="None" Caption="" IsReadOnly="false" Id="9e29e784-360f-4a39-812a-4a64c01483a9" Designer="BUILDFLAGS">
+                      <BuildFlags>{46CEF21D-3301-4517-A875-A0906828390E}</BuildFlags>
+                    </RuleCondition>
+                  </Conditions>
+                </Rule>
+              </Rules>
+            </RuleGroup>
+            <RuleGroup Caption="" MatchType="All" IsReadOnly="false" Id="custom">
+              <Rules />
+            </RuleGroup>
+          </Rules>
+        </Rules>
+      </RuleEngine>
+      <ShortFileNames GenerateShortFileNames="false" />
+      <TopicsProjectProfilePlugin>
+        <TemplateName>Visual Studio 2008 Style</TemplateName>
+        <IncludeBreadcrumbs>true</IncludeBreadcrumbs>
+        <AutoGenerateTopicIndexEntries>true</AutoGenerateTopicIndexEntries>
+        <AutoGenerateCategoryIndexEntries>true</AutoGenerateCategoryIndexEntries>
+        <IncludeOnlyCompletedTopics>false</IncludeOnlyCompletedTopics>
+        <IsNewSource>CreationDateTime</IsNewSource>
+        <IsNewCustomTopicPropertyId></IsNewCustomTopicPropertyId>
+      </TopicsProjectProfilePlugin>
+      <WidgetsProjectProfilePlugin>
+        <WidgetTypes Version="2010.0" />
+      </WidgetsProjectProfilePlugin>
+      <OtherFiles>
+        <IsLogoEnabled>false</IsLogoEnabled>
+        <LogoOtherFileName></LogoOtherFileName>
+      </OtherFiles>
+      <OutputDirectory></OutputDirectory>
+    </ProjectProfile>
+  </ProjectProfiles>
+  <HelpContextIDHeaderFile></HelpContextIDHeaderFile>
+  <PrimaryLocale CultureId="-">
+    <ExportDateTime></ExportDateTime>
+    <Dictionary></Dictionary>
+    <Notes></Notes>
+    <PhraseCultureId></PhraseCultureId>
+    <EncodingCulture></EncodingCulture>
+  </PrimaryLocale>
+</DocumentXProject>

@@ -1,0 +1,77 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <PackageId>KellermanSoftware.Serialization</PackageId>
+    <AssemblyTitle>Kellerman-Serialization</AssemblyTitle>
+    <AssemblyCompany>Kellerman Software</AssemblyCompany>
+    <AssemblyProduct>Kellerman-Serialization</AssemblyProduct>
+    <TargetFrameworks>net40;net45;net451;net452;net46;netstandard2.0;</TargetFrameworks>
+    <AssemblyName>KellermanSoftware.Serialization</AssemblyName>
+    <RootNamespace>KellermanSoftware.Serialization</RootNamespace>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <SignAssembly>True</SignAssembly>
+    <AssemblyOriginatorKeyFile>mykeyfile.snk</AssemblyOriginatorKeyFile>
+    <GeneratePackageOnBuild Condition="'$(Configuration)' == 'Release'">true</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <IsNetStandard>false</IsNetStandard>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>KellermanSoftware</Authors>
+    <Version>3.0.0</Version>
+    <AssemblyVersion>3.0.0.0</AssemblyVersion>
+    <NeutralLanguage>en-US</NeutralLanguage>
+    <Description>Binary Serialization, Compression, and Encryption Libary for .NET</Description>
+    <Copyright>Copyright 2018 Kellerman Software</Copyright>
+    <PackageLicenseUrl>https://github.com/GregFinzer/KellermanSoftware-Serialization/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/GregFinzer/KellermanSoftware-Serialization</PackageProjectUrl>
+    <PackageIconUrl>http://www.kellermanstores.com/Content/images/NuGetIcon.png</PackageIconUrl>
+    <PackageTags>binary serialization compression encryption</PackageTags>
+    <PackageReleaseNotes>Initial Release</PackageReleaseNotes>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
+    <IsNetStandard>true</IsNetStandard>
+    <DefineConstants>NETCORE;NETSTANDARD;NETSTANDARD2_0</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'net40'">
+    <DefineConstants>NET40;NETFULL</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'net45'">
+    <DefineConstants>NET45;NETFULL</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'net451'">
+    <DefineConstants>NET451;NETFULL</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'net452'">
+    <DefineConstants>NET452;NETFULL</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'net46'">
+    <DefineConstants>NET46;NETFULL</DefineConstants>
+  </PropertyGroup>
+
+
+  <ItemGroup Condition=" '$(IsNetStandard)' == 'false'">
+    <Reference Include="PresentationCore" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="documentation\documentation.dxp" />
+    <None Include="mykeyfile.snk" />
+  </ItemGroup>
+
+</Project>
