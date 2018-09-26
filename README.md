@@ -33,7 +33,11 @@ dotnet add package KellermanSoftware.Serialization
 * Compress bytes or files using MiniLZO compression
 * Encrypt strings, files, or bytes using AES Encryption
 
+# Getting Started
+https://github.com/GregFinzer/KellermanSoftware-Serialization/wiki
 
+# Help File
+https://github.com/GregFinzer/KellermanSoftware-Serialization/blob/master/Serialization-Help/Serialization-Help.chm?raw=true
 
 # Licensing
 https://github.com/GregFinzer/KellermanSoftware-Serialization/blob/master/LICENSE
