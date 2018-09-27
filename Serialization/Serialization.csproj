@@ -61,16 +61,16 @@
     <DefineConstants>$(DefineConstants);NET46;NETFULL</DefineConstants>
   </PropertyGroup>
 
+  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
+    <PackageReference Include="Microsoft.CSharp" Version="4.5.0" />
+  </ItemGroup>
+  
+  <ItemGroup Condition=" '$(IsNetStandard)' == 'false'">
+    <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
 
   <ItemGroup Condition=" '$(IsNetStandard)' == 'false'">
     <Reference Include="PresentationCore" />
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
     <Reference Include="WindowsBase" />
   </ItemGroup>
 
