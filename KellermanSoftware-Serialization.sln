@@ -10,9 +10,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SerializationConsoleTest", "SerializationConsoleTest\SerializationConsoleTest.csproj", "{80769704-576F-4BF8-9FC0-69BF4623910D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE9}") = "Build", "Build", "{DAE3C6BE-C065-4DC3-9CA8-20BB2F8278A9}"
-	ProjectSection(SolutionItems) = preProject
-		Directory.Build.props = Directory.Build.props
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
