@@ -8,6 +8,8 @@ using System.Diagnostics;
 using System.IO;
 using System.IO.IsolatedStorage;
 
+
+
 #endregion
 
 namespace KellermanSoftware.Serialization
@@ -18,6 +20,7 @@ namespace KellermanSoftware.Serialization
     public class Compression
     {
         #region Class Variables
+
         private IsolatedStorageFile _store;
         private const byte BITS = 14;
         private const uint D_MASK = (1 << BITS) - 1;
@@ -30,16 +33,16 @@ namespace KellermanSoftware.Serialization
         private const uint M4_MAX_OFFSET = 0xbfff;
 
         private uint _dictSize = 65536 + 3;
-        #endregion
+#endregion
 
-        #region Properties
+#region Properties
         private IsolatedStorageFile Store
         {
             get { return _store ?? (_store = GetIsolatedStorage()); }
         }
-        #endregion
+#endregion
 
-        #region Constructor
+#region Constructor
         /// <summary>
         /// Default constructor
         /// </summary>
@@ -48,13 +51,10 @@ namespace KellermanSoftware.Serialization
             SetupDict();
         }
 
+
         private IsolatedStorageFile GetIsolatedStorage()
         {
-#if SILVERLIGHT
-            return IsolatedStorageFile.GetUserStoreForApplication();
-#else
             return IsolatedStorageFile.GetUserStoreForDomain();
-#endif
         }
 
         private void SetupDict()
@@ -82,6 +82,7 @@ namespace KellermanSoftware.Serialization
         #endregion
 
         #region Public Methods
+
 
         /// <summary>Compress a file in isolated storage using LZO compression</summary>
         /// <param name="inputFilePath"></param>
@@ -236,6 +237,7 @@ namespace KellermanSoftware.Serialization
 
             return inputBytes;
         }
+
 
         /// <summary>Compress the passed in bytes using LZO compression</summary>
         /// <param name="inputBytes"></param>
@@ -625,9 +627,9 @@ namespace KellermanSoftware.Serialization
 
             return dst;
         }
-        #endregion
+#endregion
 
-        #region Private Methods
+#region Private Methods
 
 
         private uint CompressBytes(byte[] inputBytes, 
@@ -905,6 +907,6 @@ namespace KellermanSoftware.Serialization
         {
             return (ushort)((workmem[index]) + (workmem[index + 1] * 256));
         }
-        #endregion
+#endregion
     }
 }

@@ -18,42 +18,47 @@
     <IsNetStandard>false</IsNetStandard>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageTags>binary serialization compression encryption</PackageTags>
+    <Description>Binary Serialization, Compression, and Encryption Libary for .NET</Description>
     <Authors>KellermanSoftware</Authors>
     <Version>3.0.0</Version>
     <AssemblyVersion>3.0.0.0</AssemblyVersion>
     <NeutralLanguage>en-US</NeutralLanguage>
-    <Description>Binary Serialization, Compression, and Encryption Libary for .NET</Description>
+    <Company>Kellerman Software</Company>
     <Copyright>Copyright 2018 Kellerman Software</Copyright>
     <PackageLicenseUrl>https://github.com/GregFinzer/KellermanSoftware-Serialization/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/GregFinzer/KellermanSoftware-Serialization</PackageProjectUrl>
     <PackageIconUrl>http://www.kellermanstores.com/Content/images/NuGetIcon.png</PackageIconUrl>
-    <PackageTags>binary serialization compression encryption</PackageTags>
     <PackageReleaseNotes>Initial Release</PackageReleaseNotes>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
     <IsNetStandard>true</IsNetStandard>
-    <DefineConstants>NETCORE;NETSTANDARD;NETSTANDARD2_0</DefineConstants>
+    <DefineConstants>$(DefineConstants);NETSTANDARD2_0</DefineConstants>
   </PropertyGroup>
-
+  
+  <PropertyGroup Condition="$(IsNetStandard)">
+    <DefineConstants>$(DefineConstants);DNCORE;NETCORE;NETSTANDARD</DefineConstants>
+  </PropertyGroup>
+  
   <PropertyGroup Condition=" '$(TargetFramework)' == 'net40'">
-    <DefineConstants>NET40;NETFULL</DefineConstants>
+    <DefineConstants>$(DefineConstants);NET40;NETFULL</DefineConstants>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(TargetFramework)' == 'net45'">
-    <DefineConstants>NET45;NETFULL</DefineConstants>
+    <DefineConstants>$(DefineConstants);NET45;NETFULL</DefineConstants>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(TargetFramework)' == 'net451'">
-    <DefineConstants>NET451;NETFULL</DefineConstants>
+    <DefineConstants>$(DefineConstants);NET451;NETFULL</DefineConstants>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(TargetFramework)' == 'net452'">
-    <DefineConstants>NET452;NETFULL</DefineConstants>
+    <DefineConstants>$(DefineConstants);NET452;NETFULL</DefineConstants>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(TargetFramework)' == 'net46'">
-    <DefineConstants>NET46;NETFULL</DefineConstants>
+    <DefineConstants>$(DefineConstants);NET46;NETFULL</DefineConstants>
   </PropertyGroup>
 
 

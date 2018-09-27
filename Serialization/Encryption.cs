@@ -1,6 +1,9 @@
 ﻿using System;
 using System.IO;
+
+
 using System.IO.IsolatedStorage;
+
 using System.Security.Cryptography;
 using System.Text;
 
@@ -51,11 +54,7 @@ namespace KellermanSoftware.Serialization
 
         private IsolatedStorageFile GetIsolatedStorage()
         {
-#if SILVERLIGHT
-            return IsolatedStorageFile.GetUserStoreForApplication();
-#else
             return IsolatedStorageFile.GetUserStoreForDomain();
-#endif
         }
 
         /// <summary>
