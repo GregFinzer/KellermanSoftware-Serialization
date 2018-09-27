@@ -1,112 +1,36 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\NUnit.3.10.1\build\NUnit.props" Condition="Exists('..\packages\NUnit.3.10.1\build\NUnit.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{DE721146-53A5-4D5C-98B1-A1280DF42703}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SerializationTests</RootNamespace>
+    <TargetFrameworks>net461;netcoreapp2.0</TargetFrameworks>
     <AssemblyName>Serialization-Tests</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
+    <RootNamespace>SerializationTests</RootNamespace>
+    <IsPackable>false</IsPackable>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CSharp" Version="4.5.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.7.2" />
+    <PackageReference Include="NUnit" Version="3.10.1" />
+    <PackageReference Include="NUnit3TestAdapter" Version="3.10.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+    <PackageReference Include="System.Collections.Immutable" Version="1.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Serialization\Serialization.csproj" />
+  </ItemGroup>
+  
+  <PropertyGroup>
+    <IsNetCore>false</IsNetCore>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+
+  <PropertyGroup Condition="'$(TargetFramework)' == 'netcoreapp2.0'">
+    <IsNetCore>true</IsNetCore>
+    <DefineConstants>$(DefineConstants);DNCORE;NETSTANDARD;NETCORE</DefineConstants>
   </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="nunit.framework, Version=3.10.1.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
-      <HintPath>..\packages\NUnit.3.10.1\lib\net40\nunit.framework.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
+  
+  <ItemGroup Condition="!$(IsNetCore)">
+    <Reference Include="System.Windows.Forms" />
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="CompareObjects.cs" />
-    <Compile Include="CompressionTests.cs" />
-    <Compile Include="EncryptionTests.cs" />
-    <Compile Include="ImplicitConversionTests.cs" />
-    <Compile Include="InvalidCastTests.cs" />
-    <Compile Include="MissingAddedFieldsTest.cs" />
-    <Compile Include="PrimitiveFieldsClassTests.cs" />
-    <Compile Include="PrimitiveFieldsNullableClassTests.cs" />
-    <Compile Include="PrimitivePropertiesClassTests.cs" />
-    <Compile Include="PrimitivePropertiesNullableClassTests.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SimpleSerializationTests.cs" />
-    <Compile Include="SimpleTypeNullableWithValueTests.cs" />
-    <Compile Include="SimpleTypeNullTests.cs" />
-    <Compile Include="SimpleTypeTests.cs" />
-    <Compile Include="SpecialCasesTests.cs" />
-    <Compile Include="SpecialFieldsClassTests.cs" />
-    <Compile Include="StringConversionTests.cs" />
-    <Compile Include="TestClasses\Deck.cs" />
-    <Compile Include="TestClasses\Entity.cs" />
-    <Compile Include="TestClasses\Goal.cs" />
-    <Compile Include="TestClasses\Movie.cs" />
-    <Compile Include="TestClasses\Order.cs" />
-    <Compile Include="TestClasses\OrderDetail.cs" />
-    <Compile Include="TestClasses\Person.cs" />
-    <Compile Include="TestClasses\PrimitiveFields.cs" />
-    <Compile Include="TestClasses\PrimitiveFieldsNullable.cs" />
-    <Compile Include="TestClasses\PrimitiveProperties.cs" />
-    <Compile Include="TestClasses\PrimitivePropertiesNullable.cs" />
-    <Compile Include="TestClasses\Product.cs" />
-    <Compile Include="TestClasses\Size.cs" />
-    <Compile Include="TestClasses\SpecialFields.cs" />
-    <Compile Include="TestClasses\Starship.cs" />
-    <Compile Include="TestClasses\Task.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Serialization\Serialization.csproj">
-      <Project>{43E1C1B0-3EE5-47DF-9F25-937917546CE0}</Project>
-      <Name>Serialization</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <ProjectExtensions>
-    <VisualStudio>
-      <UserProperties DocumentXCommentEditorState="&lt;HtmlEditState&gt;&#xA;  &lt;Attributes /&gt;&#xA;&lt;/HtmlEditState&gt;" />
-    </VisualStudio>
-  </ProjectExtensions>
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\packages\NUnit.3.10.1\build\NUnit.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NUnit.3.10.1\build\NUnit.props'))" />
-  </Target>
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+  
 </Project>
