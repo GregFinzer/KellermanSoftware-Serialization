@@ -328,3 +328,14 @@ ASALocalRun/
 
 # MFractors (Xamarin productivity tool) working folder 
 .mfractor/
+
+# Added by Greg Finzer =============================================
+
+# DocumentX
+documentation/flash/
+documentation/images/
+documentation/script/
+documentation/stylesheets/
+
+# Kellerman Software .Net Automated Builds Specific Directories
+Assemblies/
