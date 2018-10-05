@@ -61,18 +61,15 @@ namespace SerializationTests
 
         }
 
+#if !NETSTANDARD
         [Test]
-        public void EncryptFileTest()
+        public void EncryptIsolatedStorageFileTest()
         {
             string password = "&%)(&JUI";
             string creditCardNumber = "4444333322221111";
             byte[] inputBytes = Encoding.UTF8.GetBytes(creditCardNumber);
 
-#if SILVERLIGHT
-            IsolatedStorageFile store = IsolatedStorageFile.GetUserStoreForApplication();
-#else
             IsolatedStorageFile store = IsolatedStorageFile.GetUserStoreForDomain();
-#endif
 
             //Create the input file
             string inputFilePath = "InputFile.txt";
@@ -85,11 +82,11 @@ namespace SerializationTests
             //Encrypt it
             string encryptedPath = "Encrypted.txt";
             Encryption encryption = new Encryption(store);
-            encryption.EncryptFile(inputFilePath, encryptedPath, password);
+            encryption.EncryptIsolatedStorageFile(inputFilePath, encryptedPath, password);
 
             //Decrypt
             string decryptedPath = "Decrypted.txt";
-            encryption.DecryptFile(encryptedPath, decryptedPath, password);
+            encryption.DecryptIsolatedStorageFile(encryptedPath, decryptedPath, password);
 
             byte[] decryptedBytes = new byte[inputBytes.Length];
 
@@ -103,5 +100,6 @@ namespace SerializationTests
 
 
         }
+#endif
     }
 }

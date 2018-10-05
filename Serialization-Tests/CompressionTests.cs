@@ -28,17 +28,14 @@ namespace SerializationTests
             Assert.AreEqual(inputBytes, decompressedBytes);
         }
 
+#if !NETSTANDARD
         [Test]
-        public void CompressFileTest()
+        public void CompressIsolatedStorageFileTest()
         {
             string inputString = "".PadRight(1000, 'z');
             byte[] inputBytes = Encoding.UTF8.GetBytes(inputString);
 
-#if SILVERLIGHT
-            IsolatedStorageFile store = IsolatedStorageFile.GetUserStoreForApplication();
-#else
             IsolatedStorageFile store = IsolatedStorageFile.GetUserStoreForDomain();
-#endif
 
             //Create the input file
             string inputFilePath = "InputFile.txt";
@@ -67,5 +64,6 @@ namespace SerializationTests
 
 
         }
+#endif
     }
 }

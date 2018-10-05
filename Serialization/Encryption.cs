@@ -333,8 +333,8 @@ namespace KellermanSoftware.Serialization
         {
             using (MemoryStream memoryStream = new MemoryStream())
             {
-#if SILVERLIGHT
-                using (AesManaged aes = new AesManaged())
+#if NETSTANDARD
+                using (var aes = Aes.Create())
 #else
                 using (RijndaelManaged aes = new RijndaelManaged())
 #endif
@@ -378,8 +378,8 @@ namespace KellermanSoftware.Serialization
         {
             using (MemoryStream memoryStream = new MemoryStream())
             {
-#if SILVERLIGHT
-                using (AesManaged aes = new AesManaged())
+#if NETSTANDARD
+                using (Aes aes = Aes.Create())
 #else
                 using (RijndaelManaged aes = new RijndaelManaged())
 #endif
@@ -398,8 +398,8 @@ namespace KellermanSoftware.Serialization
         }
 
 
-#if SILVERLIGHT
-        private void DerrivePasswordAndIv(AesManaged aes, string password)
+#if NETSTANDARD
+        private void DerrivePasswordAndIv(Aes aes, string password)
 #else
         private void DerrivePasswordAndIv(RijndaelManaged aes, string password)
 #endif
