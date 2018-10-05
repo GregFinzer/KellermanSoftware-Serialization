@@ -55,7 +55,7 @@ namespace SerializationTests
 
             watch.Reset();
             watch.Start();
-            byte[] compressedBytes = new Compression().CompressBytes(bytes);
+            byte[] compressedBytes = new Compression().CompressBytes(CompressionType.MiniLZO, bytes);
             watch.Stop();
 
             Console.WriteLine("Compress 1000 Objects: {0}", watch.ElapsedMilliseconds);

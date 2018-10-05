@@ -21,8 +21,8 @@ namespace SerializationTests
             string inputString = "".PadRight(1000, 'z');
             Compression compression = new Compression();
             byte[] inputBytes = Encoding.UTF8.GetBytes(inputString);
-            byte[] compressedBytes = compression.CompressBytes(inputBytes);
-            byte[] decompressedBytes = compression.DecompressBytes(compressedBytes);
+            byte[] compressedBytes = compression.CompressBytes(CompressionType.MiniLZO, inputBytes);
+            byte[] decompressedBytes = compression.DecompressBytes(CompressionType.MiniLZO, compressedBytes);
             
             Assert.LessOrEqual(compressedBytes.Length,inputBytes.Length);
             Assert.AreEqual(inputBytes, decompressedBytes);
@@ -50,11 +50,11 @@ namespace SerializationTests
             //Compress it
             string compressedPath = "Compressed.txt";
             Compression compression = new Compression(store);
-            compression.CompressFile(inputFilePath,compressedPath);
+            compression.CompressIsolatedStorageFile(CompressionType.MiniLZO, inputFilePath,compressedPath);
 
             //Decompress
             string uncompressedPath = "Uncompressed.txt";
-            compression.DecompressFile(compressedPath,uncompressedPath);
+            compression.DecompressIsolatedStorageFile(CompressionType.MiniLZO, compressedPath, uncompressedPath);
 
             byte[] decompressedBytes = new byte[inputBytes.Length];
 

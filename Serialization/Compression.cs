@@ -1,72 +1,33 @@
 ﻿#region Includes
-// Modified by Owen Emlen to avoid using unsafe
-// Probably slower than the original, but this mod lets us use the class with Silverlight/etc
-#define BOUNDARY_CHECKS
-
 using System;
-using System.Diagnostics;
 using System.IO;
+using System.IO.Compression;
 using System.IO.IsolatedStorage;
-
-
-
 #endregion
 
 namespace KellermanSoftware.Serialization
 {
     /// <summary>
-    /// LZO Compression Compatible with .NET, Silverlight and Windows Phone 7
+    /// Compress/Decompress with GZip, Deflate, or MiniLZO
     /// </summary>
     public class Compression
     {
         #region Class Variables
-
         private IsolatedStorageFile _store;
-        private const byte BITS = 14;
-        private const uint D_MASK = (1 << BITS) - 1;
-        private const uint M2_MAX_LEN = 8;
-        private const uint M2_MAX_OFFSET = 0x0800;
-        private const byte M3_MARKER = 32;
-        private const uint M3_MAX_OFFSET = 0x4000;
-        private const byte M4_MARKER = 16;
-        private const uint M4_MAX_LEN = 9;
-        private const uint M4_MAX_OFFSET = 0xbfff;
+        #endregion
 
-        private uint _dictSize = 65536 + 3;
-#endregion
-
-#region Properties
+        #region Properties
         private IsolatedStorageFile Store
         {
             get { return _store ?? (_store = GetIsolatedStorage()); }
         }
-#endregion
+        #endregion
 
-#region Constructor
         /// <summary>
-        /// Default constructor
+        /// Default Constructor
         /// </summary>
         public Compression()
         {
-            SetupDict();
-        }
-
-
-        private IsolatedStorageFile GetIsolatedStorage()
-        {
-            return IsolatedStorageFile.GetUserStoreForDomain();
-        }
-
-        private void SetupDict()
-        {
-            if (IntPtr.Size == 8)
-            {
-                _dictSize = (65536 + 3) * 2;
-            }
-            else
-            {
-                _dictSize = 65536 + 3;
-            }
         }
 
         /// <summary>
@@ -76,13 +37,12 @@ namespace KellermanSoftware.Serialization
         public Compression(IsolatedStorageFile store)
         {
             _store = store;
-            SetupDict();
         }
 
-        #endregion
-
-        #region Public Methods
-
+        private IsolatedStorageFile GetIsolatedStorage()
+        {
+            return IsolatedStorageFile.GetUserStoreForDomain();
+        }
 
         /// <summary>Compress a file in isolated storage using LZO compression</summary>
         /// <param name="inputFilePath"></param>
@@ -136,16 +96,16 @@ namespace KellermanSoftware.Serialization
         /// Dim uncompressedPath As String = "Uncompressed.txt"
         /// compression.DecompressFile(compressedPath,uncompressedPath)</code>
         /// </example>
-        public void CompressFile(string inputFilePath, string outputFilePath)
+        public void CompressIsolatedStorageFile(CompressionType compressionType, string inputFilePath, string outputFilePath)
         {
             using (IsolatedStorageFileStream inputStream = new IsolatedStorageFileStream(inputFilePath, FileMode.Open, FileAccess.Read, FileShare.Read, Store))
             {
                 byte[] inputBytes = ReadAllBytes(inputStream);
-                byte[] compressedBytes = CompressBytes(inputBytes);
+                byte[] compressedBytes = CompressBytes(compressionType, inputBytes);
 
                 using (IsolatedStorageFileStream outputStream = new IsolatedStorageFileStream(outputFilePath, FileMode.Create, FileAccess.Write, FileShare.None, Store))
                 {
-                    outputStream.Write(compressedBytes,0,compressedBytes.Length);
+                    outputStream.Write(compressedBytes, 0, compressedBytes.Length);
                 }
             }
         }
@@ -202,13 +162,13 @@ namespace KellermanSoftware.Serialization
         /// Dim uncompressedPath As String = "Uncompressed.txt"
         /// compression.DecompressFile(compressedPath,uncompressedPath)</code>
         /// </example>
-        public void DecompressFile(string inputFilePath, string outputFilePath)
+        public void DecompressIsolatedStorageFile(CompressionType compressionType, string inputFilePath, string outputFilePath)
         {
             using (IsolatedStorageFileStream inputStream = new IsolatedStorageFileStream(inputFilePath, FileMode.Open, FileAccess.Read, FileShare.Read, Store))
             {
 
                 byte[] inputBytes = ReadAllBytes(inputStream);
-                byte[] decompressedBytes = DecompressBytes(inputBytes);
+                byte[] decompressedBytes = DecompressBytes(compressionType, inputBytes);
 
                 using (IsolatedStorageFileStream outputStream = new IsolatedStorageFileStream(outputFilePath, FileMode.Create, FileAccess.Write, FileShare.None, Store))
                 {
@@ -238,675 +198,917 @@ namespace KellermanSoftware.Serialization
             return inputBytes;
         }
 
-
-        /// <summary>Compress the passed in bytes using LZO compression</summary>
-        /// <param name="inputBytes"></param>
+        /// <summary>
+        /// Compress the passed bytes using the specified compression type
+        /// </summary>
+        /// <param name="compressionType"></param>
+        /// <param name="input"></param>
         /// <returns></returns>
         /// <example>
-        /// 	<code title="Example" description="" lang="CS">string inputString = "".PadRight(1000, 'z');
+        /// 	<code title="Example" description="" lang="CS">
         /// Compression compression = new Compression();
-        /// byte[] inputBytes = Encoding.UTF8.GetBytes(inputString);
-        /// byte[] compressedBytes = compression.CompressBytes(inputBytes);
-        /// byte[] decompressedBytes = compression.DecompressBytes(compressedBytes);</code>
-        /// 	<code title="Example2" description="" lang="VB.NET">Dim inputString As String = "".PadRight(1000, "z"c)
+        /// 
+        ///  
+        /// byte[] input = new byte[1024];
+        ///  
+        /// for (int i = 0; i &lt; 1024; i++)
+        ///     input[i] = 5;
+        ///  
+        /// byte[] results = compression.CompressBytes(CompressionType.GZip, input);
+        /// Console.WriteLine("{0} bytes compressed to {1} bytes with GZIP", input.Length, results.Length);
+        ///  
+        /// results = compression.CompressBytes(CompressionType.Deflate, input);
+        /// Console.WriteLine("{0} bytes compressed to {1} bytes with Deflate", input.Length, results.Length);
+        ///  
+        /// results = compression.CompressBytes(CompressionType.MiniLZO, input);
+        /// Console.WriteLine("{0} bytes compressed to {1} bytes with MiniLZO", input.Length, results.Length);</code>
+        /// 	<code title="Example2" description="" lang="VB.NET">
         /// Dim compression As New Compression()
-        /// Dim inputBytes() As Byte = Encoding.UTF8.GetBytes(inputString)
-        /// Dim compressedBytes() As Byte = compression.CompressBytes(inputBytes)
-        /// Dim decompressedBytes() As Byte = compression.DecompressBytes(compressedBytes)</code>
+        /// 
+        ///  
+        /// Dim input(1023) As Byte
+        ///  
+        /// For i As Integer = 0 To 1023
+        ///     input(i) = 5
+        /// Next i
+        ///  
+        /// Dim results() As Byte = compression.CompressBytes(CompressionType.GZip, input)
+        /// Console.WriteLine("{0} bytes compressed to {1} bytes with GZIP", input.Length, results.Length)
+        ///  
+        /// results = compression.CompressBytes(CompressionType.Deflate, input)
+        /// Console.WriteLine("{0} bytes compressed to {1} bytes with Deflate", input.Length, results.Length)
+        ///  
+        /// results = compression.CompressBytes(CompressionType.MiniLZO, input)
+        /// Console.WriteLine("{0} bytes compressed to {1} bytes with MiniLZO", input.Length, results.Length)</code>
         /// </example>
-        public byte[] CompressBytes(byte[] inputBytes)
+        public byte[] CompressBytes(CompressionType compressionType, byte[] input)
         {
-            if (inputBytes == null)
-                return null;
-
-            return CompressBytes(inputBytes, 0, inputBytes.Length);
+            try
+            {
+                MemoryStream msInput = new MemoryStream();
+                msInput.Write(input, 0, input.Length);
+                return CompressMemoryStream(compressionType, msInput).ToArray();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Could not compress, check input. Error: " + ex.Message, ex);
+            }
         }
-
-
 
         /// <summary>
-        /// Compress a range of bytes using LZO compression
+        /// Decompress the passed bytes using the specified compression type
         /// </summary>
-        /// <param name="inputBytes"></param>
-        /// <param name="inputByteStart"></param>
-        /// <param name="inputByteLength"></param>
-        /// <returns></returns>
-        public byte[] CompressBytes(byte[] inputBytes, int inputByteStart, int inputByteLength)
-        {
-            if (inputBytes == null)
-                throw new ArgumentNullException("inputBytes");
-
-            if (inputByteStart < 0)
-                throw new ArgumentOutOfRangeException("inputByteStart was " + inputByteStart);
-
-            if (inputByteStart + inputByteLength > inputBytes.Length)
-                throw new ArgumentOutOfRangeException("inputBytes[] has length " + inputBytes.Length + ", but inputByteStart + inputByteLength was " + (inputByteStart + inputByteLength));
-
-            uint dstlen = (uint)(inputByteLength + (inputByteLength / 16) + 64 + 3 + 4);
-            byte[] dst = new byte[dstlen];
-
-            uint compressedSize = CompressBytes(inputBytes, (uint)inputByteStart, (uint)inputByteLength, dst, 0, dstlen, null);
-
-            if (dst.Length != compressedSize)
-            {
-                byte[] final = new byte[compressedSize];
-                Buffer.BlockCopy(dst, 0, final, 0, (int)compressedSize);
-                dst = final;
-            }
-
-            return dst;
-        }
-
-
-
-        /// <summary>Decompress the passed bytes using LZO compression</summary>
-        /// <param name="inputBytes"></param>
+        /// <param name="compressionType"></param>
+        /// <param name="input"></param>
         /// <returns></returns>
         /// <example>
-        /// 	<code title="Example" description="" lang="CS">string inputString = "".PadRight(1000, 'z');
+        /// 	<code title="Example" description="" lang="CS">
         /// Compression compression = new Compression();
-        /// byte[] inputBytes = Encoding.UTF8.GetBytes(inputString);
-        /// byte[] compressedBytes = compression.CompressBytes(inputBytes);
-        /// byte[] decompressedBytes = compression.DecompressBytes(compressedBytes);</code>
-        /// 	<code title="Example2" description="" lang="VB.NET">Dim inputString As String = "".PadRight(1000, "z"c)
+        /// 
+        ///  
+        /// byte[] input = new byte[1024];
+        ///  
+        /// for (int i = 0; i &lt; 1024; i++)
+        ///     input[i] = 5;
+        ///  
+        /// byte[] compressedBytes = compression.CompressBytes(CompressionType.GZip, input);
+        /// Console.WriteLine("{0} bytes compressed to {1} bytes with GZIP", input.Length, compressedBytes.Length);
+        /// byte[] decompressedBytes = compression.DecompressBytes(CompressionType.GZip, compressedBytes);
+        ///  
+        /// compressedBytes = compression.CompressBytes(CompressionType.Deflate, input);
+        /// Console.WriteLine("{0} bytes compressed to {1} bytes with Deflate", input.Length, compressedBytes.Length);
+        /// decompressedBytes = compression.DecompressBytes(CompressionType.Deflate, compressedBytes);
+        ///  
+        /// compressedBytes = compression.CompressBytes(CompressionType.MiniLZO, input);
+        /// Console.WriteLine("{0} bytes compressed to {1} bytes with MiniLZO", input.Length, compressedBytes.Length);
+        /// decompressedBytes = compression.DecompressBytes(CompressionType.MiniLZO, compressedBytes);</code>
+        /// 	<code title="Example2" description="" lang="VB.NET">
         /// Dim compression As New Compression()
-        /// Dim inputBytes() As Byte = Encoding.UTF8.GetBytes(inputString)
-        /// Dim compressedBytes() As Byte = compression.CompressBytes(inputBytes)
-        /// Dim decompressedBytes() As Byte = compression.DecompressBytes(compressedBytes)</code>
+        /// 
+        ///  
+        /// Dim input(1023) As Byte
+        ///  
+        /// For i As Integer = 0 To 1023
+        ///     input(i) = 5
+        /// Next i
+        ///  
+        /// Dim compressedBytes() As Byte = compression.CompressBytes(CompressionType.GZip, input)
+        /// Console.WriteLine("{0} bytes compressed to {1} bytes with GZIP", input.Length, compressedBytes.Length)
+        /// Dim decompressedBytes() As Byte = compression.DecompressBytes(CompressionType.GZip, compressedBytes)
+        ///  
+        /// compressedBytes = compression.CompressBytes(CompressionType.Deflate, input)
+        /// Console.WriteLine("{0} bytes compressed to {1} bytes with Deflate", input.Length, compressedBytes.Length)
+        /// decompressedBytes = compression.DecompressBytes(CompressionType.Deflate, compressedBytes)
+        ///  
+        /// compressedBytes = compression.CompressBytes(CompressionType.MiniLZO, input)
+        /// Console.WriteLine("{0} bytes compressed to {1} bytes with MiniLZO", input.Length, compressedBytes.Length)
+        /// decompressedBytes = compression.DecompressBytes(CompressionType.MiniLZO, compressedBytes)</code>
         /// </example>
-        public byte[] DecompressBytes(byte[] inputBytes)
+        public byte[] DecompressBytes(CompressionType compressionType, byte[] input)
         {
-            if (inputBytes == null)
-                return null;
-
-            byte[] dst = new byte[(inputBytes[inputBytes.Length - 4] | (inputBytes[inputBytes.Length - 3] << 8) | (inputBytes[inputBytes.Length - 2] << 16 | inputBytes[inputBytes.Length - 1] << 24))];
-
-            uint t = 0;
-            uint lipEnd = (uint)inputBytes.Length - 4;
-            uint lopEnd = (uint)dst.Length;
-
-            uint lip = 0;
-            uint lop = 0;
-            bool match = false;
-            bool matchNext = false;
-            bool matchDone = false;
-            bool copyMatch = false;
-            bool firstLiteralRun = false;
-            bool eofFound = false;
-
-            if (inputBytes[lip] > 17)
+            try
             {
-                t = (uint)(inputBytes[lip] - 17); lip++;
-                if (t < 4)
-                    matchNext = true;
-                else
-                {
-#if BOUNDARY_CHECKS
-                    Debug.Assert(t > 0);
-                    if ((lopEnd - lop) < t)
-                        throw new OverflowException("Output Overrun");
-                    if ((lipEnd - lip) < t + 1)
-                        throw new OverflowException("Input Overrun");
-#endif
-                    do
-                    {
-                        dst[lop] = inputBytes[lip]; lop++; lip++;
-                    } while (--t > 0);
-                    firstLiteralRun = true;
-                }
+                MemoryStream msInput = new MemoryStream();
+                msInput.Write(input, 0, input.Length);
+                return DecompressMemoryStream(compressionType, msInput).ToArray();
             }
-            while (!eofFound && lip < lipEnd)
+            catch (Exception ex)
             {
-                if (!matchNext && !firstLiteralRun)
-                {
-                    t = inputBytes[lip]; lip++;
-                    if (t >= 16)
-                        match = true;
-                    else
-                    {
-                        if (t == 0)
-                        {
-#if BOUNDARY_CHECKS
-                            if ((lipEnd - lip) < 1)
-                                throw new OverflowException("Input Overrun");
-#endif
-                            while (inputBytes[lip] == 0)
-                            {
-                                t += 255;
-                                lip++;
-#if BOUNDARY_CHECKS
-                                if ((lipEnd - lip) < 1)
-                                    throw new OverflowException("Input Overrun");
-#endif
-                            }
-                            t += (uint)(15 + inputBytes[lip]);
-                            lip++;
-                        }
-#if BOUNDARY_CHECKS
-                        Debug.Assert(t > 0);
-                        if ((lopEnd - lop) < t + 3)
-                            throw new OverflowException("Output Overrun");
-                        if ((lipEnd - lip) < t + 4)
-                            throw new OverflowException("Input Overrun");
-#endif
-                        for (int x = 0; x < 4; ++x, ++lop, ++lip)
-                            dst[lop] = inputBytes[lip];
-                        if (--t > 0)
-                        {
-                            if (t >= 4)
-                            {
-                                do
-                                {
-                                    for (int x = 0; x < 4; ++x, ++lop, ++lip)
-                                        dst[lop] = inputBytes[lip];
-                                    t -= 4;
-                                } while (t >= 4);
-                                if (t > 0)
-                                {
-                                    do
-                                    {
-                                        dst[lop] = inputBytes[lip]; lop++; lip++;
-                                    } while (--t > 0);
-                                }
-                            }
-                            else
-                            {
-                                do
-                                {
-                                    dst[lop] = inputBytes[lip]; lop++; lip++;
-                                } while (--t > 0);
-                            }
-                        }
-                    }
-                }
-                uint lpos;
-                if (!match && !matchNext)
-                {
-                    firstLiteralRun = false;
-
-                    t = inputBytes[lip]; lip++;
-                    if (t >= 16)
-                        match = true;
-                    else
-                    {
-                        lpos = lop - (1 + M2_MAX_OFFSET);
-                        lpos -= t >> 2;
-                        lpos -= ((uint)inputBytes[lip]) << 2;
-                        lip++;
-#if BOUNDARY_CHECKS
-                        if (lpos < 0 || lpos >= lop)
-                            throw new OverflowException("Lookbehind Overrun");
-                        if ((lopEnd - lop) < 3)
-                            throw new OverflowException("Output Overrun");
-#endif
-
-                        dst[lop] = dst[lpos]; lop++; lpos++;
-                        dst[lop] = dst[lpos]; lop++; lpos++;
-                        dst[lop] = dst[lpos]; lop++; lpos++;
-                        matchDone = true;
-                    }
-                }
-                match = false;
-                do
-                {
-                    if (t >= 64)
-                    {
-                        lpos = lop - 1;
-                        lpos -= (t >> 2) & 7;
-                        lpos -= ((uint)inputBytes[lip]) << 3;
-                        lip++;
-                        t = (t >> 5) - 1;
-#if BOUNDARY_CHECKS
-                        if (lpos < 0 || lpos >= lop)
-                            throw new OverflowException("Lookbehind Overrun");
-                        if ((lopEnd - lop) < t + 2)
-                            throw new OverflowException("Output Overrun");
-#endif
-                        copyMatch = true;
-                    }
-                    else if (t >= 32)
-                    {
-                        t &= 31;
-                        if (t == 0)
-                        {
-#if BOUNDARY_CHECKS
-                            if ((lipEnd - lip) < 1)
-                                throw new OverflowException("Input Overrun");
-#endif
-                            while (inputBytes[lip] == 0)
-                            {
-                                t += 255;
-                                lip++;
-#if BOUNDARY_CHECKS
-                                if ((lipEnd - lip) < 1)
-                                    throw new OverflowException("Input Overrun");
-#endif
-                            }
-                            t += (uint)(31 + inputBytes[lip]);
-                            lip++;
-                        }
-                        lpos = lop - 1;
-                        lpos -= (uint)GetUShortFrom2Bytes(inputBytes, lip) >> 2;
-                        lip += 2;
-                    }
-                    else if (t >= 16)
-                    {
-                        lpos = lop;
-                        lpos -= (t & 8) << 11;
-
-                        t &= 7;
-                        if (t == 0)
-                        {
-#if BOUNDARY_CHECKS
-                            if ((lipEnd - lip) < 1)
-                                throw new OverflowException("Input Overrun");
-#endif
-                            while (inputBytes[lip] == 0)
-                            {
-                                t += 255;
-                                lip++;
-#if BOUNDARY_CHECKS
-                                if ((lipEnd - lip) < 1)
-                                    throw new OverflowException("Input Overrun");
-#endif
-                            }
-                            t += (uint)(7 + inputBytes[lip]);
-                            lip++;
-                        }
-                        lpos -= (uint)GetUShortFrom2Bytes(inputBytes, lip) >> 2;
-                        lip += 2;
-                        if (lpos == lop)
-                            eofFound = true;
-                        else
-                            lpos -= 0x4000;
-                    }
-                    else
-                    {
-                        lpos = lop - 1;
-                        lpos -= t >> 2;
-                        lpos -= ((uint)inputBytes[lip]) << 2;
-                        lip++;
-#if BOUNDARY_CHECKS
-                        if (lpos < 0 || lpos >= lop)
-                            throw new OverflowException("Lookbehind Overrun");
-                        if ((lopEnd - lop) < 2)
-                            throw new OverflowException("Output Overrun");
-#endif
-                        dst[lop] = dst[lpos]; lop++; lpos++;
-                        dst[lop] = dst[lpos]; lop++; lpos++;
-                        matchDone = true;
-                    }
-                    if (!eofFound && !matchDone && !copyMatch)
-                    {
-#if BOUNDARY_CHECKS
-                        if (lpos < 0 || lpos >= lop)
-                            throw new OverflowException("Lookbehind Overrun");
-                        Debug.Assert(t > 0);
-                        if ((lopEnd - lop) < t + 2)
-                            throw new OverflowException("Output Overrun");
-#endif
-                    }
-                    if (!eofFound && t >= 2 * 4 - 2 && (lop - lpos) >= 4 && !matchDone && !copyMatch)
-                    {
-                        for (int x = 0; x < 4; ++x, ++lop, ++lpos)
-                            dst[lop] = dst[lpos];
-
-                        t -= 2;
-                        do
-                        {
-                            for (int x = 0; x < 4; ++x, ++lop, ++lpos)
-                                dst[lop] = dst[lpos];
-                            t -= 4;
-                        } while (t >= 4);
-                        if (t > 0)
-                        {
-                            do
-                            {
-                                dst[lop] = dst[lpos]; lop++; lpos++;
-                            } while (--t > 0);
-                        }
-                    }
-                    else if (!eofFound && !matchDone)
-                    {
-                        copyMatch = false;
-
-                        dst[lop] = dst[lpos]; lop++; lpos++;
-                        dst[lop] = dst[lpos]; lop++; lpos++;
-                        do
-                        {
-                            dst[lop] = dst[lpos]; lop++; lpos++;
-                        } while (--t > 0);
-                    }
-
-                    if (!eofFound && !matchNext)
-                    {
-                        matchDone = false;
-
-                        t = (uint)(inputBytes[lip - 2] & 3);
-                        if (t == 0)
-                            break;
-                    }
-                    if (!eofFound)
-                    {
-                        matchNext = false;
-#if BOUNDARY_CHECKS
-                        Debug.Assert(t > 0);
-                        Debug.Assert(t < 4);
-                        if ((lopEnd - lop) < t)
-                            throw new OverflowException("Output Overrun");
-                        if ((lipEnd - lip) < t + 1)
-                            throw new OverflowException("Input Overrun");
-#endif
-                        dst[lop] = inputBytes[lip]; lop++; lip++;
-                        if (t > 1)
-                        {
-                            dst[lop] = inputBytes[lip]; lop++; lip++;
-                            if (t > 2)
-                            {
-                                dst[lop] = inputBytes[lip]; lop++; lip++;
-                            }
-                        }
-                        t = inputBytes[lip]; lip++;
-                    }
-                } while (!eofFound && lip < lipEnd);
+                throw new Exception("Could not decompress, check input. Error: " + ex.Message, ex);
             }
-            if (!eofFound)
-                throw new OverflowException("EOF Marker Not Found");
-            else
-            {
-#if BOUNDARY_CHECKS
-                Debug.Assert(t == 1);
-                if (lip > lipEnd)
-                    throw new OverflowException("Input Overrun");
-
-                if (lip < lipEnd)
-                    throw new OverflowException("Input Not Consumed");
-#endif
-            }
-
-
-            return dst;
         }
-#endregion
 
-#region Private Methods
-
-
-        private uint CompressBytes(byte[] inputBytes, 
-            uint inputByteStart, 
-            uint inputBytesLength, 
-            byte[] outputBytes, 
-            uint outputByteStart, 
-            uint outputBytesLength, 
-            uint[] dictNew)
+        private MemoryStream CompressMemoryStream(CompressionType compressionType, MemoryStream input)
         {
-            // using all of dict_size?
-            if (dictNew == null)
-                dictNew = new uint[_dictSize];
-
-            uint tmp;
-            if (inputBytesLength <= M2_MAX_LEN + 5)
+            try
             {
-                tmp = inputBytesLength;
-                outputBytesLength = 0;
-            }
-            else
-            {
-                uint linEnd = inputByteStart + inputBytesLength;
-                uint lipEnd = inputByteStart + inputBytesLength - M2_MAX_LEN - 5;
-
-                uint lii = inputByteStart;
-                uint lip = inputByteStart + 4;
-                uint lop = outputByteStart;
-
-                bool literal = false;
-                bool match = false;
-
-                for (; ; )
+                switch (compressionType)
                 {
-                    uint offset = 0;
-                    uint index = DIndex1(inputBytes, lip);
-                    uint lpos = lip - (lip - dictNew[index]);
+                    case CompressionType.Deflate:
+                        return DeflateCompressMemoryStream(CompressionMode.Compress, input);
+                    case CompressionType.GZip:
+                        return GZipCompressMemoryStream(CompressionMode.Compress, input);
+                    case CompressionType.MiniLZO:
+                        return MiniLZOCompressMemoryStream(input);
+                    default:
+                        throw new NotSupportedException(compressionType.ToString() + " is not supported");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Could not compress, check input. Error: " + ex.Message, ex);
+            }
+        }
 
-                    if (lpos < inputByteStart || (offset = (lip - lpos)) <= 0 || offset > M4_MAX_OFFSET)
-                        literal = true;
-                    else if (offset <= M2_MAX_OFFSET || inputBytes[lpos + 3] == inputBytes[lip + 3]) { }
-                    else
-                    {
-                        index = DIndex2(index);
-                        lpos = lip - (lip - dictNew[index]);
-                        if (lpos < inputByteStart || (offset = (lip - lpos)) <= 0 || offset > M4_MAX_OFFSET)
-                            literal = true;
-                        else if (offset <= M2_MAX_OFFSET || inputBytes[lpos + 3] == inputBytes[lip + 3]) { }
-                        else
-                            literal = true;
-                    }
+        private MemoryStream MiniLZOCompressMemoryStream(MemoryStream input)
+        {
+            return new MemoryStream(MiniLZO.Compress(input));
+        }
 
-                    if (!literal)
-                    {
-                        if (GetUShortFrom2Bytes(inputBytes, lpos) == GetUShortFrom2Bytes(inputBytes, lip) && inputBytes[lpos + 2] == inputBytes[lip + 2])
-                            match = true;
-                    }
+        private MemoryStream DecompressMemoryStream(CompressionType compressionType, MemoryStream input)
+        {
+            try
+            {
+                switch (compressionType)
+                {
+                    case CompressionType.Deflate:
+                        return DeflateDecompressMemoryStream(input);
+                    case CompressionType.GZip:
+                        return GZipDecompressMemoryStream(input);
+                    case CompressionType.MiniLZO:
+                        return MiniLZODecompressMemoryStream(input);
+                    default:
+                        throw new NotSupportedException(compressionType.ToString() + " is not supported");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Could not decompress, check input. Error: " + ex.Message, ex);
+            }
+        }
 
-                    literal = false;
-                    if (!match)
-                    {
-                        dictNew[index] = lip;
-                        lip++;
-                        if (lip >= lipEnd)
-                            break;
-                        continue;
-                    }
-                    match = false;
-                    dictNew[index] = lip;
-                    if (lip - lii > 0)
-                    {
-                        uint t = (lip - lii);
-                        if (t <= 3)
-                        {
+        private MemoryStream MiniLZODecompressMemoryStream(MemoryStream input)
+        {
+            return new MemoryStream(MiniLZO.Decompress(input.ToArray()));
+        }
 
-                            outputBytes[lop - 2] |= (byte)(t);
-                        }
-                        else if (t <= 18)
-                        {
-                            outputBytes[lop] = (byte)(t - 3); lop++;
-                        }
-                        else
-                        {
-                            uint tt = t - 18;
-                            outputBytes[lop] = 0; lop++;
-                            while (tt > 255)
-                            {
-                                tt -= 255;
-                                outputBytes[lop] = 0; lop++;
-                            }
-                            Debug.Assert(tt > 0);
-                            outputBytes[lop] = (byte)(tt); lop++;
-                        }
-                        do
-                        {
-                            outputBytes[lop] = inputBytes[lii]; lop++; lii++;
+        /// <summary>
+        /// Compress a stream using the specified compression type
+        /// </summary>
+        /// <param name="compressionType"></param>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        /// <example>
+        /// 	<code title="Example" description="" lang="CS">
+        /// Compression compression = new Compression();
+        /// 
+        ///  
+        /// StringBuilder sb = new StringBuilder();
+        /// for (int i = 0; i &lt; 1024; i++)
+        ///     sb.AppendLine("This is a test");
+        ///  
+        /// File.WriteAllText("input.txt", sb.ToString());
+        ///  
+        /// using (FileStream inputStream = new FileStream("input.txt", FileMode.Open, FileAccess.Read))
+        /// {
+        ///     Stream compressedStream = compression.CompressStream(CompressionType.MiniLZO, inputStream);
+        ///     Console.WriteLine("{0} bytes compressed to {1} bytes with MiniLZO", inputStream.Length, compressedStream.Length);
+        /// }</code>
+        /// 	<code title="Example2" description="" lang="VB.NET">
+        /// Dim compression As New Compression()
+        /// 
+        ///  
+        /// Dim sb As New StringBuilder()
+        /// For i As Integer = 0 To 1023
+        ///     sb.AppendLine("This is a test")
+        /// Next i
+        ///  
+        /// File.WriteAllText("input.txt", sb.ToString())
+        ///  
+        /// Using inputStream As New FileStream("input.txt", FileMode.Open, FileAccess.Read)
+        ///     Dim compressedStream As Stream = compression.CompressStream(CompressionType.MiniLZO, inputStream)
+        ///     Console.WriteLine("{0} bytes compressed to {1} bytes with MiniLZO", inputStream.Length, compressedStream.Length)
+        /// End Using</code>
+        /// </example>
+        public Stream CompressStream(CompressionType compressionType, Stream input)
+        {
+            try
+            {
+                switch (compressionType)
+                {
+                    case CompressionType.Deflate:
+                        return DeflateCompressStream(input);
+                    case CompressionType.GZip:
+                        return GZipCompressStream(input);
+                    case CompressionType.MiniLZO:
+                        return MiniLZOCompressStream(input);
+                    default:
+                        throw new NotSupportedException(compressionType.ToString() + " is not supported");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Could not compress, check input. Error: " + ex.Message, ex);
+            }
+        }
 
+        private Stream MiniLZOCompressStream(Stream input)
+        {
+            MemoryStream memoryStream = new MemoryStream();
 
-                        } while (--t > 0);
-                    }
-                    Debug.Assert(lii == lip);
-                    lip += 3;
-                    uint length;
-                    if (inputBytes[lpos + 3] != inputBytes[lip++] ||
-                        inputBytes[lpos + 4] != inputBytes[lip++] ||
-                        inputBytes[lpos + 5] != inputBytes[lip++] ||
-                        inputBytes[lpos + 6] != inputBytes[lip++] ||
-                        inputBytes[lpos + 7] != inputBytes[lip++] ||
-                        inputBytes[lpos + 8] != inputBytes[lip++])
-                    {
-                        lip--;
-                        length = (lip - lii);
-                        Debug.Assert(length >= 3);
-                        Debug.Assert(length <= M2_MAX_LEN);
-                        if (offset <= M2_MAX_OFFSET)
-                        {
-                            --offset;
-                            outputBytes[lop] = (byte)(((length - 1) << 5) | ((offset & 7) << 2));
-                            lop++;
-                            outputBytes[lop] = (byte)(offset >> 3);
-                            lop++;
-                        }
-                        else if (offset <= M3_MAX_OFFSET)
-                        {
-                            --offset;
-                            outputBytes[lop] = (byte)(M3_MARKER | (length - 2));
-                            lop++;
-                            outputBytes[lop] = (byte)((offset & 63) << 2);
-                            lop++;
-                            outputBytes[lop] = (byte)(offset >> 6);
-                            lop++;
-                        }
-                        else
-                        {
-                            offset -= 0x4000;
-                            Debug.Assert(offset > 0);
-                            Debug.Assert(offset <= 0x7FFF);
-                            outputBytes[lop] = (byte)(M4_MARKER | ((offset & 0x4000) >> 11) | (length - 2));
-                            lop++;
-                            outputBytes[lop] = (byte)((offset & 63) << 2);
-                            lop++;
-                            outputBytes[lop] = (byte)(offset >> 6);
-                            lop++;
-                        }
-                    }
-                    else
-                    {
-                        uint lm = lpos + M2_MAX_LEN + 1;
-                        while (lip < linEnd && inputBytes[lm] == inputBytes[lip])
-                        {
-                            lm++;
-                            lip++;
-                        }
-                        length = (lip - lii);
-                        Debug.Assert(length > M2_MAX_LEN);
-                        if (offset <= M3_MAX_OFFSET)
-                        {
-                            --offset;
-                            if (length <= 33)
-                            {
-                                outputBytes[lop] = (byte)(M3_MARKER | (length - 2)); lop++;
-                            }
-                            else
-                            {
-                                length -= 33;
-                                outputBytes[lop] = M3_MARKER | 0; lop++;
-                                while (length > 255)
-                                {
-                                    length -= 255;
-                                    outputBytes[lop] = 0; lop++;
-                                }
-                                Debug.Assert(length > 0);
-                                outputBytes[lop] = (byte)(length); lop++;
+            const int BUFFERSIZE = 10000;
+            byte[] buffer = new byte[BUFFERSIZE];
+            while (true)
+            {
+                int bytesRead = input.Read(buffer, 0, BUFFERSIZE);
+                if (bytesRead == 0)
+                {
+                    break;
+                }
+                memoryStream.Write(buffer, 0, bytesRead);
+            }
 
-                            }
-                        }
-                        else
-                        {
-                            offset -= 0x4000;
-                            Debug.Assert(offset > 0);
-                            Debug.Assert(offset <= 0x7FFF);
-                            if (length <= M4_MAX_LEN)
-                            {
-                                outputBytes[lop] = (byte)(M4_MARKER | ((offset & 0x4000) >> 11) | (length - 2)); lop++;
-                            }
-                            else
-                            {
-                                length -= M4_MAX_LEN;
-                                outputBytes[lop] = (byte)(M4_MARKER | ((offset & 0x4000) >> 11)); lop++;
-                                while (length > 255)
-                                {
-                                    length -= 255;
-                                    outputBytes[lop] = 0; lop++;
-                                }
-                                Debug.Assert(length > 0);
-                                outputBytes[lop] = (byte)(length); lop++;
-                            }
-                        }
-                        outputBytes[lop] = (byte)((offset & 63) << 2); lop++;
-                        outputBytes[lop] = (byte)(offset >> 6); lop++;
-                    }
-                    lii = lip;
-                    if (lip >= lipEnd)
+            memoryStream.Seek(0, SeekOrigin.Begin);
+
+            return new MemoryStream(MiniLZO.Compress(memoryStream));
+        }
+
+        /// <summary>
+        /// Decompress a stream using the specified compression type
+        /// </summary>
+        /// <param name="compressionType"></param>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        /// <example>
+        /// 	<code title="Example" description="" lang="CS">
+        /// Compression compression = new Compression();
+        /// 
+        ///  
+        /// StringBuilder sb = new StringBuilder();
+        /// for (int i = 0; i &lt; 1024; i++)
+        ///     sb.AppendLine("This is a test");
+        ///  
+        /// File.WriteAllText("input.txt", sb.ToString());
+        ///  
+        /// using (FileStream inputStream = new FileStream("input.txt", FileMode.Open, FileAccess.Read))
+        /// {
+        ///     Stream compressedStream = compression.CompressStream(CompressionType.MiniLZO, inputStream);
+        ///     Console.WriteLine("{0} bytes compressed to {1} bytes with MiniLZO", inputStream.Length, compressedStream.Length);
+        ///  
+        ///     Stream decompressedStream = compression.DecompressStream(CompressionType.MiniLZO, compressedStream);
+        /// }</code>
+        /// 	<code title="Example2" description="" lang="VB.NET">
+        /// Dim compression As New Compression()
+        /// 
+        ///  
+        /// Dim sb As New StringBuilder()
+        /// For i As Integer = 0 To 1023
+        ///     sb.AppendLine("This is a test")
+        /// Next i
+        ///  
+        /// File.WriteAllText("input.txt", sb.ToString())
+        ///  
+        /// Using inputStream As New FileStream("input.txt", FileMode.Open, FileAccess.Read)
+        ///     Dim compressedStream As Stream = compression.CompressStream(CompressionType.MiniLZO, inputStream)
+        ///     Console.WriteLine("{0} bytes compressed to {1} bytes with MiniLZO", inputStream.Length, compressedStream.Length)
+        ///  
+        ///     Dim decompressedStream As Stream = compression.DecompressStream(CompressionType.MiniLZO, compressedStream)
+        /// End Using</code>
+        /// </example>
+        public Stream DecompressStream(CompressionType compressionType, Stream input)
+        {
+            try
+            {
+                switch (compressionType)
+                {
+                    case CompressionType.Deflate:
+                        return DeflateDecompressStream(input);
+                    case CompressionType.GZip:
+                        return GZipDecompressStream(input);
+                    case CompressionType.MiniLZO:
+                        return MiniLZODecompressStream(input);
+                    default:
+                        throw new NotSupportedException(compressionType.ToString() + " is not supported");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Could not decompress, check input. Error: " + ex.Message, ex);
+            }
+        }
+
+        private Stream MiniLZODecompressStream(Stream input)
+        {
+            MemoryStream memoryStream = new MemoryStream();
+
+            const int BUFFERSIZE = 10000;
+            byte[] buffer = new byte[BUFFERSIZE];
+            while (true)
+            {
+                int bytesRead = input.Read(buffer, 0, BUFFERSIZE);
+                if (bytesRead == 0)
+                {
+                    break;
+                }
+                memoryStream.Write(buffer, 0, bytesRead);
+            }
+
+            memoryStream.Seek(0, SeekOrigin.Begin);
+
+            return new MemoryStream(MiniLZO.Decompress(memoryStream.ToArray()));
+        }
+
+        /// <summary>
+        /// Compress a file using the specified compression type
+        /// </summary>
+        /// <param name="compressionType"></param>
+        /// <param name="inputFilePath"></param>
+        /// <param name="outputFilePath"></param>
+        /// <example>
+        /// 	<code title="Example" description="" lang="CS">
+        /// Compression compression = new Compression();
+        /// 
+        ///  
+        /// StringBuilder sb = new StringBuilder();
+        /// for (int i = 0; i &lt; 1024; i++)
+        ///     sb.AppendLine("This is a test");
+        ///  
+        /// File.WriteAllText("input.txt", sb.ToString());
+        ///  
+        /// compression.CompressFile(CompressionType.MiniLZO, "input.txt", "compressed.txt");
+        /// compression.DecompressFile(CompressionType.MiniLZO, "compressed.txt", "decompressed.txt");</code>
+        /// 	<code title="Example2" description="" lang="VB.NET">
+        /// Dim compression As New Compression()
+        /// 
+        ///  
+        /// Dim sb As New StringBuilder()
+        /// For i As Integer = 0 To 1023
+        ///     sb.AppendLine("This is a test")
+        /// Next i
+        ///  
+        /// File.WriteAllText("input.txt", sb.ToString())
+        ///  
+        /// compression.CompressFile(CompressionType.MiniLZO, "input.txt", "compressed.txt")
+        /// compression.DecompressFile(CompressionType.MiniLZO, "compressed.txt", "decompressed.txt")</code>
+        /// </example>
+        public void CompressFile(CompressionType compressionType, string inputFilePath, string outputFilePath)
+        {
+            try
+            {
+                switch (compressionType)
+                {
+                    case CompressionType.Deflate:
+                        DeflateCompressFile(inputFilePath, outputFilePath);
                         break;
+                    case CompressionType.GZip:
+                        GZipCompressFile(inputFilePath, outputFilePath);
+                        break;
+                    case CompressionType.MiniLZO:
+                        MiniLZOCompressFile(inputFilePath, outputFilePath);
+                        break;
+                    default:
+                        throw new NotSupportedException(compressionType.ToString() + " is not supported");
                 }
-                outputBytesLength = (lop - outputByteStart);
-                tmp = (linEnd - lii);
             }
-
-            if (tmp > 0)
+            catch (Exception ex)
             {
-                uint ii = inputBytesLength - tmp + inputByteStart;
-                if (outputBytesLength == 0 && tmp <= 238)
-                {
-                    outputBytes[outputBytesLength++] = (byte)(17 + tmp);
-                }
-                else if (tmp <= 3)
-                {
-                    outputBytes[outputBytesLength - 2] |= (byte)(tmp);
-                }
-                else if (tmp <= 18)
-                {
-                    outputBytes[outputBytesLength++] = (byte)(tmp - 3);
-                }
-                else
-                {
-                    uint tt = tmp - 18;
-                    outputBytes[outputBytesLength++] = 0;
-                    while (tt > 255)
-                    {
-                        tt -= 255;
-                        outputBytes[outputBytesLength++] = 0;
-                    }
-                    Debug.Assert(tt > 0);
-                    outputBytes[outputBytesLength++] = (byte)(tt);
-                }
-                do
-                {
-                    outputBytes[outputBytesLength++] = inputBytes[ii++];
-                } while (--tmp > 0);
+                throw new Exception("Could not compress, check input. Error: " + ex.Message, ex);
             }
-            outputBytes[outputBytesLength++] = M4_MARKER | 1;
-            outputBytes[outputBytesLength++] = 0;
-            outputBytes[outputBytesLength++] = 0;
-
-            // Append the inputStream count
-            outputBytes[outputBytesLength++] = (byte)inputBytesLength;
-            outputBytes[outputBytesLength++] = (byte)(inputBytesLength >> 8);
-            outputBytes[outputBytesLength++] = (byte)(inputBytesLength >> 16);
-            outputBytes[outputBytesLength++] = (byte)(inputBytesLength >> 24);
-
-            return outputBytesLength;
         }
 
-        private uint DIndex1(byte[] src, uint input)
+        private void MiniLZOCompressFile(string inputFilePath, string outputFilePath)
         {
-            byte b2 = src[input + 2];
-            byte b1 = src[input + 1];
-            byte b0 = src[input];
+            using (FileStream inputFileStream = new FileStream(inputFilePath, FileMode.Open))
+            {
+                Stream stream = MiniLZOCompressStream(inputFileStream);
+                stream.Seek(0, SeekOrigin.Begin);
 
-            return D_MASK & ((0x21 *
-                              (
-                                  ((uint)(((b2 << 6) ^ b1) << 5) ^ b0)
-                                  << 5) ^ b0
-                             ) >> 5);
+                using (FileStream outputFileStream = new FileStream(outputFilePath, FileMode.Create))
+                {
+                    const int BUFFERSIZE = 10000;
+                    byte[] buffer = new byte[BUFFERSIZE];
+                    while (true)
+                    {
+                        int bytesRead = stream.Read(
+                            buffer, 0, BUFFERSIZE);
+                        if (bytesRead == 0)
+                        {
+                            break;
+                        }
+                        outputFileStream.Write(
+                            buffer, 0, bytesRead);
+                    }
+                }
+            }
         }
 
-        private uint DIndex2(uint idx)
+        /// <summary>
+        /// Decompress a file using the specified compression type
+        /// </summary>
+        /// <param name="compressionType"></param>
+        /// <param name="inputFilePath"></param>
+        /// <param name="outputFilePath"></param>
+        /// <example>
+        /// 	<code title="Example" description="" lang="CS">
+        /// Compression compression = new Compression();
+        /// 
+        ///  
+        /// StringBuilder sb = new StringBuilder();
+        /// for (int i = 0; i &lt; 1024; i++)
+        ///     sb.AppendLine("This is a test");
+        ///  
+        /// File.WriteAllText("input.txt", sb.ToString());
+        ///  
+        /// compression.CompressFile(CompressionType.MiniLZO, "input.txt", "compressed.txt");
+        /// compression.DecompressFile(CompressionType.MiniLZO, "compressed.txt", "decompressed.txt");</code>
+        /// 	<code title="Example2" description="" lang="VB.NET">
+        /// Dim compression As New Compression()
+        /// 
+        ///  
+        /// Dim sb As New StringBuilder()
+        /// For i As Integer = 0 To 1023
+        ///     sb.AppendLine("This is a test")
+        /// Next i
+        ///  
+        /// File.WriteAllText("input.txt", sb.ToString())
+        ///  
+        /// compression.CompressFile(CompressionType.MiniLZO, "input.txt", "compressed.txt")
+        /// compression.DecompressFile(CompressionType.MiniLZO, "compressed.txt", "decompressed.txt")</code>
+        /// </example>
+        public void DecompressFile(CompressionType compressionType, string inputFilePath, string outputFilePath)
         {
-            return (idx & (D_MASK & 0x7FF)) ^ (((D_MASK >> 1) + 1) | 0x1F);
+            try
+            {
+                switch (compressionType)
+                {
+                    case CompressionType.Deflate:
+                        DeflateDecompressFile(inputFilePath, outputFilePath);
+                        break;
+                    case CompressionType.GZip:
+                        GZipDecompressFile(inputFilePath, outputFilePath);
+                        break;
+                    case CompressionType.MiniLZO:
+                        MiniLZODecompressFile(inputFilePath, outputFilePath);
+                        break;
+                    default:
+                        throw new NotSupportedException(compressionType.ToString() + " is not supported");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Could not decompress, check input. Error: " + ex.Message, ex);
+            }
         }
 
-
-        private ushort GetUShortFrom2Bytes(byte[] workmem, uint index)
+        private void MiniLZODecompressFile(string inputFilePath, string outputFilePath)
         {
-            return (ushort)((workmem[index]) + (workmem[index + 1] * 256));
+            using (FileStream inputFileStream = new FileStream(inputFilePath, FileMode.Open))
+            {
+                Stream stream = MiniLZODecompressStream(inputFileStream);
+                stream.Seek(0, SeekOrigin.Begin);
+
+                using (FileStream outputFileStream = new FileStream(outputFilePath, FileMode.Create))
+                {
+                    const int BUFFERSIZE = 10000;
+                    byte[] buffer = new byte[BUFFERSIZE];
+                    while (true)
+                    {
+                        int bytesRead = stream.Read(
+                            buffer, 0, BUFFERSIZE);
+                        if (bytesRead == 0)
+                        {
+                            break;
+                        }
+                        outputFileStream.Write(
+                            buffer, 0, bytesRead);
+                    }
+                }
+            }
         }
-#endregion
+
+        #region Compress/Decompress Memory Stream
+
+        /// <summary>
+        /// Compress a memory stream with Gzip
+        /// </summary>
+        /// <param name="mode"></param>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        private MemoryStream GZipCompressMemoryStream(CompressionMode mode, MemoryStream input)
+        {
+            MemoryStream outputStream = new MemoryStream();
+            input.Position = 0;
+
+            using (GZipStream compressedFileStream = new GZipStream(outputStream, mode))
+            {
+                // You've got all the streams you need. 
+                // Now do the compression.
+                const int BUFFERSIZE = 10000;
+                int bytesRead = 0;
+                byte[] buffer = new byte[BUFFERSIZE];
+                while (true)
+                {
+                    bytesRead = input.Read(
+                      buffer, 0, BUFFERSIZE);
+                    if (bytesRead == 0)
+                    {
+                        break;
+                    }
+                    compressedFileStream.Write(
+                      buffer, 0, bytesRead);
+                }
+            }
+
+            return outputStream;
+        }
+
+        /// <summary>
+        /// Compress a memory stream with deflate
+        /// </summary>
+        /// <param name="mode"></param>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        private MemoryStream DeflateCompressMemoryStream(CompressionMode mode, MemoryStream input)
+        {
+            MemoryStream outputStream = new MemoryStream();
+            input.Position = 0;
+
+            using (DeflateStream compressedStream = new DeflateStream(outputStream, mode))
+            {
+                // You've got all the streams you need. 
+                // Now do the compression.
+                const int BUFFERSIZE = 10000;
+                int bytesRead = 0;
+                byte[] buffer = new byte[BUFFERSIZE];
+                while (true)
+                {
+                    bytesRead = input.Read(
+                      buffer, 0, BUFFERSIZE);
+                    if (bytesRead == 0)
+                    {
+                        break;
+                    }
+                    compressedStream.Write(
+                      buffer, 0, bytesRead);
+                }
+            }
+
+            return outputStream;
+        }
+
+        /// <summary>
+        /// Decompress a Memory stream compress with Deflate
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public MemoryStream DeflateDecompressMemoryStream(MemoryStream input)
+        {
+            MemoryStream outputStream = new MemoryStream();
+            input.Position = 0;
+
+            using (DeflateStream compressedStream = new DeflateStream(input, CompressionMode.Decompress))
+            {
+                // You've got all the streams you need. 
+                // Now do the compression.
+                const int BUFFERSIZE = 10000;
+                int bytesRead = 0;
+                byte[] buffer = new byte[BUFFERSIZE];
+                while (true)
+                {
+                    bytesRead = compressedStream.Read(buffer, 0, BUFFERSIZE);
+                    if (bytesRead == 0)
+                    {
+                        break;
+                    }
+                    outputStream.Write(buffer, 0, bytesRead);
+                }
+            }
+
+            return outputStream;
+        }
+
+        /// <summary>
+        /// Decompress a Memory stream compress with GZip
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public MemoryStream GZipDecompressMemoryStream(MemoryStream input)
+        {
+            MemoryStream outputStream = new MemoryStream();
+            input.Position = 0;
+
+            using (GZipStream compressedStream = new GZipStream(input, CompressionMode.Decompress))
+            {
+                // You've got all the streams you need. 
+                // Now do the compression.
+                const int BUFFERSIZE = 10000;
+                int bytesRead = 0;
+                byte[] buffer = new byte[BUFFERSIZE];
+                while (true)
+                {
+                    bytesRead = compressedStream.Read(buffer, 0, BUFFERSIZE);
+                    if (bytesRead == 0)
+                    {
+                        break;
+                    }
+                    outputStream.Write(buffer, 0, bytesRead);
+                }
+            }
+
+            return outputStream;
+        }
+        #endregion
+
+        #region Compress/Decompress Streams
+        /// <summary>
+        /// Compress a stream using Gzip
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        private Stream GZipCompressStream(Stream input)
+        {
+            MemoryStream outputStream = new MemoryStream();
+            input.Position = 0;
+
+            using (GZipStream compressedFileStream = new GZipStream(outputStream, CompressionMode.Compress))
+            {
+                // You've got all the streams you need. 
+                // Now do the compression.
+                const int BUFFERSIZE = 10000;
+                int bytesRead = 0;
+                byte[] buffer = new byte[BUFFERSIZE];
+                while (true)
+                {
+                    bytesRead = input.Read(
+                      buffer, 0, BUFFERSIZE);
+                    if (bytesRead == 0)
+                    {
+                        break;
+                    }
+                    compressedFileStream.Write(
+                      buffer, 0, bytesRead);
+                }
+            }
+
+            return outputStream;
+        }
+
+        /// <summary>
+        /// Compress a stream using Deflate
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        private Stream DeflateCompressStream(Stream input)
+        {
+            MemoryStream outputStream = new MemoryStream();
+            input.Position = 0;
+
+            using (DeflateStream compressedStream = new DeflateStream(outputStream, CompressionMode.Compress))
+            {
+                // You've got all the streams you need. 
+                // Now do the compression.
+                const int BUFFERSIZE = 10000;
+                int bytesRead = 0;
+                byte[] buffer = new byte[BUFFERSIZE];
+                while (true)
+                {
+                    bytesRead = input.Read(
+                      buffer, 0, BUFFERSIZE);
+                    if (bytesRead == 0)
+                    {
+                        break;
+                    }
+                    compressedStream.Write(
+                      buffer, 0, bytesRead);
+                }
+            }
+
+            return outputStream;
+        }
+
+        /// <summary>
+        /// Decompress a stream compress with Deflate
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public Stream DeflateDecompressStream(Stream input)
+        {
+            MemoryStream outputStream = new MemoryStream();
+            input.Position = 0;
+
+            using (DeflateStream compressedStream = new DeflateStream(input, CompressionMode.Decompress))
+            {
+                // You've got all the streams you need. 
+                // Now do the compression.
+                const int BUFFERSIZE = 10000;
+                int bytesRead = 0;
+                byte[] buffer = new byte[BUFFERSIZE];
+                while (true)
+                {
+                    bytesRead = compressedStream.Read(buffer, 0, BUFFERSIZE);
+                    if (bytesRead == 0)
+                    {
+                        break;
+                    }
+                    outputStream.Write(buffer, 0, bytesRead);
+                }
+            }
+
+            return outputStream;
+        }
+
+        /// <summary>
+        /// Decompress a stream compress with GZip
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public Stream GZipDecompressStream(Stream input)
+        {
+            MemoryStream outputStream = new MemoryStream();
+            input.Position = 0;
+
+            using (GZipStream compressedStream = new GZipStream(input, CompressionMode.Decompress))
+            {
+                // You've got all the streams you need. 
+                // Now do the compression.
+                const int BUFFERSIZE = 10000;
+                int bytesRead = 0;
+                byte[] buffer = new byte[BUFFERSIZE];
+                while (true)
+                {
+                    bytesRead = compressedStream.Read(buffer, 0, BUFFERSIZE);
+                    if (bytesRead == 0)
+                    {
+                        break;
+                    }
+                    outputStream.Write(buffer, 0, bytesRead);
+                }
+            }
+
+            return outputStream;
+        }
+
+
+
+
+
+
+        #endregion
+
+        #region File Compression/Decompression
+        /// <summary>
+        /// Compress a file with the deflate algorithim
+        /// </summary>        
+        /// <param name="inputFileName"></param>
+        /// <param name="outputFileName"></param>
+        private void DeflateCompressFile(String inputFileName, String outputFileName)
+        {
+            using (FileStream inputFileStream = new FileStream(inputFileName, FileMode.Open))
+            {
+                using (FileStream outputFileStream = new FileStream(outputFileName, FileMode.Create))
+                {
+                    using (DeflateStream compressedFileStream = new DeflateStream(outputFileStream, CompressionMode.Compress))
+                    {
+                        // You've got all the streams you need. 
+                        // Now do the compression.
+                        const int BUFFERSIZE = 10000;
+                        int bytesRead = 0;
+                        byte[] buffer = new byte[BUFFERSIZE];
+                        while (true)
+                        {
+                            bytesRead = inputFileStream.Read(
+                              buffer, 0, BUFFERSIZE);
+                            if (bytesRead == 0)
+                            {
+                                break;
+                            }
+                            compressedFileStream.Write(
+                              buffer, 0, bytesRead);
+                        }
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Compress a file with the GZip algorithim
+        /// </summary>
+        /// <param name="inputFileName"></param>
+        /// <param name="outputFileName"></param>
+        private void GZipCompressFile(String inputFileName, String outputFileName)
+        {
+            using (FileStream inputFileStream =
+              new FileStream(inputFileName, FileMode.Open))
+            {
+                using (FileStream outputFileStream = new FileStream(outputFileName, FileMode.Create))
+                {
+                    using (GZipStream compressedFileStream = new GZipStream(outputFileStream, CompressionMode.Compress))
+                    {
+                        // You've got all the streams you need. 
+                        // Now do the compression.
+                        const int BUFFERSIZE = 10000;
+                        int bytesRead = 0;
+                        byte[] buffer = new byte[BUFFERSIZE];
+                        while (true)
+                        {
+                            bytesRead = inputFileStream.Read(
+                              buffer, 0, BUFFERSIZE);
+                            if (bytesRead == 0)
+                            {
+                                break;
+                            }
+                            compressedFileStream.Write(
+                              buffer, 0, bytesRead);
+                        }
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Decompress a file using Gzip Algorithm
+        /// </summary>
+        /// <param name="inputFileName"></param>
+        /// <param name="outputFileName"></param>
+        public void GZipDecompressFile(String inputFileName, String outputFileName)
+        {
+            using (FileStream inputFileStream = new FileStream(inputFileName, FileMode.Open))
+            {
+                using (FileStream outputFileStream = new FileStream(outputFileName, FileMode.Create))
+                {
+                    using (GZipStream compressedFileStream = new GZipStream(inputFileStream, CompressionMode.Decompress))
+                    {
+                        // You've got all the streams you need. 
+                        // Now do the compression.
+                        const int BUFFERSIZE = 10000;
+                        int bytesRead = 0;
+                        byte[] buffer = new byte[BUFFERSIZE];
+                        while (true)
+                        {
+                            bytesRead = compressedFileStream.Read(buffer, 0, BUFFERSIZE);
+                            if (bytesRead == 0)
+                            {
+                                break;
+                            }
+                            outputFileStream.Write(buffer, 0, bytesRead);
+                        }
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Decompress a file using Deflate Algorithm
+        /// </summary>
+        /// <param name="inputFileName"></param>
+        /// <param name="outputFileName"></param>
+        public void DeflateDecompressFile(String inputFileName, String outputFileName)
+        {
+            using (FileStream inputFileStream = new FileStream(inputFileName, FileMode.Open))
+            {
+                using (FileStream outputFileStream = new FileStream(outputFileName, FileMode.Create))
+                {
+                    using (DeflateStream compressedFileStream = new DeflateStream(inputFileStream, CompressionMode.Decompress))
+                    {
+                        // You've got all the streams you need. 
+                        // Now do the compression.
+                        const int BUFFERSIZE = 10000;
+                        int bytesRead = 0;
+                        byte[] buffer = new byte[BUFFERSIZE];
+                        while (true)
+                        {
+                            bytesRead = compressedFileStream.Read(buffer, 0, BUFFERSIZE);
+                            if (bytesRead == 0)
+                            {
+                                break;
+                            }
+                            outputFileStream.Write(buffer, 0, bytesRead);
+                        }
+                    }
+                }
+            }
+        }
+        #endregion
+
     }
 }
