@@ -1,8 +1,9 @@
 ﻿using System;
 using System.IO;
 
-
+#if !NETSTANDARD
 using System.IO.IsolatedStorage;
+#endif
 
 using System.Security.Cryptography;
 using System.Text;
@@ -14,7 +15,9 @@ namespace KellermanSoftware.Serialization
     /// </summary>
     public class Encryption : IEncryption
     {
+#if !NETSTANDARD
         private IsolatedStorageFile _store;
+#endif
         private readonly char[] _ivChars = new[] { '~', '#', '!', '?', '@', '%', '.', '^', 'f', 'A', '7', '9', '&', '|', ';', 'Z' };
 
         /// <summary>
@@ -31,10 +34,12 @@ namespace KellermanSoftware.Serialization
         /// </summary>
         public int KeySize { get; set; }
 
+#if !NETSTANDARD
         private IsolatedStorageFile Store
         {
             get { return _store ?? (_store = GetIsolatedStorage()); }
         }
+#endif
 
         /// <summary>
         /// See http://en.wikipedia.org/wiki/Salt_%28cryptography%29
@@ -52,6 +57,7 @@ namespace KellermanSoftware.Serialization
             Salt = "PasswordSalt";
         }
 
+#if !NETSTANDARD
         private IsolatedStorageFile GetIsolatedStorage()
         {
             return IsolatedStorageFile.GetUserStoreForDomain();
@@ -65,7 +71,7 @@ namespace KellermanSoftware.Serialization
         {
             _store = store;
         }
-
+#endif
 
         /// <summary>Encrypt the passed string and base64 encode it</summary>
         /// <param name="inputString"></param>
@@ -125,6 +131,7 @@ namespace KellermanSoftware.Serialization
             return Encoding.UTF8.GetString(decryptedBytes, 0, decryptedBytes.Length);
         }
 
+#if !NETSTANDARD
         /// <summary>Encrypt a file in isolated storage</summary>
         /// <param name="inputFilePath"></param>
         /// <param name="outputFilePath"></param>
@@ -180,7 +187,7 @@ namespace KellermanSoftware.Serialization
         ///  Dim decryptedPath As String = "Decrypted.txt"
         ///  encryption.DecryptFile(encryptedPath, decryptedPath, password)</code>
         /// </example>
-        public void EncryptFile(string inputFilePath, string outputFilePath, string password)
+        public void EncryptIsolatedStorageFile(string inputFilePath, string outputFilePath, string password)
         {
             using (IsolatedStorageFileStream inputStream = new IsolatedStorageFileStream(inputFilePath, FileMode.Open, FileAccess.Read, FileShare.Read, Store))
             {
@@ -267,7 +274,7 @@ namespace KellermanSoftware.Serialization
         ///  Dim decryptedPath As String = "Decrypted.txt"
         ///  encryption.DecryptFile(encryptedPath, decryptedPath, password)</code>
         /// </example>
-        public void DecryptFile(string inputFilePath, string outputFilePath, string password)
+        public void DecryptIsolatedStorageFile(string inputFilePath, string outputFilePath, string password)
         {
             using (IsolatedStorageFileStream inputStream = new IsolatedStorageFileStream(inputFilePath, FileMode.Open, FileAccess.Read, FileShare.Read, Store))
             {
@@ -298,6 +305,7 @@ namespace KellermanSoftware.Serialization
                 }
             }
         }
+#endif
 
         /// <summary>Encrypt the passed bytes</summary>
         /// <param name="inputBytes"></param>

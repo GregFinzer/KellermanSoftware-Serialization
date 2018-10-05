@@ -2,7 +2,11 @@
 using System;
 using System.IO;
 using System.IO.Compression;
+
+#if !NETSTANDARD
 using System.IO.IsolatedStorage;
+#endif
+
 #endregion
 
 namespace KellermanSoftware.Serialization
@@ -12,16 +16,20 @@ namespace KellermanSoftware.Serialization
     /// </summary>
     public class Compression
     {
-        #region Class Variables
+#region Class Variables
+#if !NETSTANDARD
         private IsolatedStorageFile _store;
-        #endregion
+#endif
+#endregion
 
-        #region Properties
+#region Properties
+#if !NETSTANDARD
         private IsolatedStorageFile Store
         {
             get { return _store ?? (_store = GetIsolatedStorage()); }
         }
-        #endregion
+#endif
+#endregion
 
         /// <summary>
         /// Default Constructor
@@ -30,6 +38,7 @@ namespace KellermanSoftware.Serialization
         {
         }
 
+#if !NETSTANDARD
         /// <summary>
         /// Constructor that takes in an IsolatedStorageFile
         /// </summary>
@@ -197,6 +206,7 @@ namespace KellermanSoftware.Serialization
 
             return inputBytes;
         }
+#endif
 
         /// <summary>
         /// Compress the passed bytes using the specified compression type
@@ -706,7 +716,7 @@ namespace KellermanSoftware.Serialization
             }
         }
 
-        #region Compress/Decompress Memory Stream
+#region Compress/Decompress Memory Stream
 
         /// <summary>
         /// Compress a memory stream with Gzip
@@ -837,9 +847,9 @@ namespace KellermanSoftware.Serialization
 
             return outputStream;
         }
-        #endregion
+#endregion
 
-        #region Compress/Decompress Streams
+#region Compress/Decompress Streams
         /// <summary>
         /// Compress a stream using Gzip
         /// </summary>
@@ -973,9 +983,9 @@ namespace KellermanSoftware.Serialization
 
 
 
-        #endregion
+#endregion
 
-        #region File Compression/Decompression
+#region File Compression/Decompression
         /// <summary>
         /// Compress a file with the deflate algorithim
         /// </summary>        
@@ -1108,7 +1118,7 @@ namespace KellermanSoftware.Serialization
                 }
             }
         }
-        #endregion
+#endregion
 
     }
 }
