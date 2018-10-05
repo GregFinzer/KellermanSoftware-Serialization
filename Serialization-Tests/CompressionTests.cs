@@ -16,7 +16,7 @@ namespace SerializationTests
     public class CompressionTests
     {
         [Test]
-        public void CompressBytesTest()
+        public void MiniLzoCompressBytesTest()
         {
             string inputString = "".PadRight(1000, 'z');
             Compression compression = new Compression();
@@ -28,6 +28,31 @@ namespace SerializationTests
             Assert.AreEqual(inputBytes, decompressedBytes);
         }
 
+        [Test]
+        public void GZipCompressBytesTest()
+        {
+            string inputString = "".PadRight(1000, 'z');
+            Compression compression = new Compression();
+            byte[] inputBytes = Encoding.UTF8.GetBytes(inputString);
+            byte[] compressedBytes = compression.CompressBytes(CompressionType.GZip, inputBytes);
+            byte[] decompressedBytes = compression.DecompressBytes(CompressionType.GZip, compressedBytes);
+
+            Assert.LessOrEqual(compressedBytes.Length, inputBytes.Length);
+            Assert.AreEqual(inputBytes, decompressedBytes);
+        }
+
+        [Test]
+        public void DeflateCompressBytesTest()
+        {
+            string inputString = "".PadRight(1000, 'z');
+            Compression compression = new Compression();
+            byte[] inputBytes = Encoding.UTF8.GetBytes(inputString);
+            byte[] compressedBytes = compression.CompressBytes(CompressionType.Deflate, inputBytes);
+            byte[] decompressedBytes = compression.DecompressBytes(CompressionType.Deflate, compressedBytes);
+
+            Assert.LessOrEqual(compressedBytes.Length, inputBytes.Length);
+            Assert.AreEqual(inputBytes, decompressedBytes);
+        }
 #if !NETSTANDARD
         [Test]
         public void CompressIsolatedStorageFileTest()
