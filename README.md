@@ -30,7 +30,7 @@ dotnet add package KellermanSoftware.Serialization
 ```
 # Features
 * Serialize and deserialize objects without the BinaryFormatter or JSON.NET.  Classes do not need to be marked as serializable
-* Compress bytes or files using MiniLZO compression
+* Compress bytes or files using GZip, Deflate, or MiniLZO compression
 * Encrypt strings, files, or bytes using AES Encryption
 
 # Getting Started
