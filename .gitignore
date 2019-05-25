@@ -339,3 +339,11 @@ documentation/stylesheets/
 
 # Kellerman Software .Net Automated Builds Specific Directories
 Assemblies/
+/Serialization/documentation/build/Kellerman Software Serialization
+/Serialization/documentation/designtime
+/Serialization/documentation/dotnetimages
+/Serialization/documentation/flash
+/Serialization/documentation/images
+/Serialization/documentation/script
+/Serialization/documentation/scripts
+/Serialization/documentation/stylesheets
